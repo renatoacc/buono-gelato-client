@@ -9,7 +9,9 @@
   align-items: center;
   flex-direction: column;
   font-family: Raleway;
+  color:#133b60
 }
+
 .buttonsBuono{
   border: none;
   border-radius: 25px;
@@ -30,12 +32,46 @@
   font-size: 1.25rem;
   text-decoration: none;
   color: #133b60;
+  font-family: Raleway;
 }
 
 .imgLogo{
   width: 200px;
   margin: 10px;
 }
+
+.signup{
+  background: url(./assets/img/background.jpeg);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color:#133b60;
+  font-family: Raleway;
+}
+.signup > img{
+  width: 150px;
+}
+
+.signup > form > input{
+  display: flex;
+  font-family: Raleway;
+  width: 80vw;
+  height: 3vh;
+  margin: 10px;
+  border-radius: 15vw;
+  text-align: center;
+  font-size: 4.5vw;
+  border: none;
+  color:#133b60;
+  box-shadow: 2px 1px 2px 1px #46464610;
+}
+.signup > button{
+  width: 40vw;
+  font-family: Raleway;
+}
+
 .text-danger{
   color: red;
 }
