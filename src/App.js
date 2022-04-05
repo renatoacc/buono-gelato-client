@@ -3,8 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/clients/Home";
 import LayoutComponent from "./components/clients/LayoutComponent";
 import Signup from "./components/clients/Signup";
+import { useContext } from "react";
+import { CountryContext } from "./context/CountryProvider";
 
 function App() {
+  const { country, toggleCountry } = useContext(CountryContext);
+
   return (
     <div>
       <Routes>
