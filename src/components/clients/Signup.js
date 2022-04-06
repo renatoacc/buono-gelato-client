@@ -159,7 +159,7 @@ export default function Signup() {
         <p className="text-danger">{passwordError}</p>
         <p className="text-danger">{confirmPasswordError}</p>
 
-        <button className="buttonsBuono">Submit</button>
+        <button className="buttonsBuono">Insert</button>
         <br />
         <a className="link" href="/login">
           Login
