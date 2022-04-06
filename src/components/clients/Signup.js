@@ -1,5 +1,10 @@
+import axios from "axios";
+import { API_BASE_URL } from "../../consts";
+import { useNavigate } from "react-router-dom";
+
 import { useState } from "react";
 import logo from "../../assets/img/logo.png";
+
 export default function Signup() {
   const [user, setUser] = useState({
     firstName: "",
@@ -10,6 +15,7 @@ export default function Signup() {
     vat: "",
     phone: "",
     email: "",
+    password: "",
   });
 
   const [passwordError, setPasswordErr] = useState("");
@@ -78,12 +84,26 @@ export default function Signup() {
   const handleUserState = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
+  const navigate = useNavigate();
+  const [error, setError] = useState();
+
+  const handleSignup = async (event) => {
+    event.preventDefault();
+    const finalUser = { ...user, password: passwordInput.password };
+    try {
+      const response = await axios.post(API_BASE_URL + "/signup", finalUser);
+      console.log(response.data);
+      navigate("/login");
+    } catch (erro) {
+      setError({ message: erro.response.data.errorMessage });
+    }
+  };
 
   return (
     <div className="formsPage">
       <img src={logo} alt="Buono Gelato" />
       <h1>Signup</h1>
-      <form>
+      <form onSubmit={handleSignup}>
         <input
           name="firstName"
           type="text"
@@ -121,8 +141,8 @@ export default function Signup() {
         />
         <input
           name="vat"
-          type="number"
-          value={user.tax}
+          type=""
+          value={user.vat}
           placeholder="VAT Number"
           onChange={handleUserState}
         />
@@ -159,7 +179,9 @@ export default function Signup() {
         <p className="text-danger">{passwordError}</p>
         <p className="text-danger">{confirmPasswordError}</p>
 
-        <button className="buttonsBuono">Insert</button>
+        <button className="buttonsBuono" type="submit">
+          Signup
+        </button>
         <br />
         <a className="link" href="/login">
           Login
