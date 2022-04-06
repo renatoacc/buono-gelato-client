@@ -6,6 +6,7 @@ import Signup from "./components/clients/Signup";
 import { useContext } from "react";
 import { CountryContext } from "./context/CountryProvider";
 import Login from "./components/clients/Login";
+import Profile from "./components/clients/Profile";
 
 function App() {
   const { country, toggleCountry } = useContext(CountryContext);
@@ -16,7 +17,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
-        <Route element={<LayoutComponent />}></Route>
+        <Route element={<LayoutComponent />}>
+          <Route path="profile" element={<Profile />} />
+        </Route>
       </Routes>
     </div>
   );

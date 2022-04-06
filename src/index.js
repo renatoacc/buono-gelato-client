@@ -5,14 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { CountryProvider } from "./context/CountryProvider";
+import { AuthProvider } from "./context/AuthProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CountryProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </CountryProvider>
+    <BrowserRouter>
+      <CountryProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </CountryProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
