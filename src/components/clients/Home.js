@@ -5,7 +5,7 @@ export default function Home() {
     <div className="layout">
       <img className="imgLogo" src={Logo} alt="Buono Gelato" />
       <button className="buttonsBuono">Login</button>
-      <a id="signupLink" href="/signup">
+      <a className="link" href="/signup">
         Signup
       </a>
     </div>

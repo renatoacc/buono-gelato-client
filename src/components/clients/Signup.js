@@ -80,7 +80,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="signup">
+    <div className="formsPage">
       <img src={logo} alt="Buono Gelato" />
       <h1>Signup</h1>
       <form>
@@ -161,8 +161,8 @@ export default function Signup() {
 
         <button className="buttonsBuono">Submit</button>
         <br />
-        <a id="signupLink" href="/login">
-          login
+        <a className="link" href="/login">
+          Login
         </a>
       </form>
     </div>
