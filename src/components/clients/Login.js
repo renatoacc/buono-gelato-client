@@ -13,7 +13,7 @@ export default function Login() {
           type="password"
           value=""
         />
-        <p>Erros Login</p>
+        <p>teste git</p>
         <button className="buttonsBuono">Login</button>
         <a className="link" href="/signup">
           Signup
