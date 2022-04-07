@@ -1,24 +1,35 @@
 import { API_BASE_URL } from "../../consts";
-import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthProvider";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Shop() {
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function listProducts() {
       try {
         const { data } = await axios.get(API_BASE_URL + "/shop");
-        console.log(data);
+        setProducts(data);
       } catch (error) {
         console.log(error.response.data);
       }
     }
     listProducts();
   }, []);
-  console.log(data);
-  return <div>Shop</div>;
+  console.log(products);
+  return (
+    <div>
+      {products.map((elem) => {
+        return (
+          <div key={elem._id}>
+            <a href={elem._id}>
+              <h1>{elem.name}</h1>
+            </a>
+            <h3>{elem.typeProduct}</h3>
+            <p>{elem.price}€</p>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
