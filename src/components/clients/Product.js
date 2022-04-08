@@ -6,17 +6,26 @@ import { AuthContext } from "../../context/AuthProvider";
 
 export default function Product() {
   const params = useParams();
+  const [dataUser, setDataUser] = useState({});
   const [oneProduct, setOneProduct] = useState({});
   const [quantity, setQuantity] = useState({ quantity: "" });
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext); // logout , removeUserFromContext
+  const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
 
-  useEffect(() => {
-    console.log(user);
-    if (!user) {
+  async function getUser() {
+    const { data } = await axios.get(API_BASE_URL + "/logged");
+    if (data) {
+      addUserToContext(data);
+    } else {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }
+
+  useEffect(() => {
+    if (!user) {
+      getUser();
+    }
+  }, []);
 
   const handleQuantity = (event) => {
     setQuantity({ [event.target.name]: event.target.value });
@@ -32,7 +41,13 @@ export default function Product() {
     getData();
   }, [params]);
 
-  //   const addCart
+  useEffect(() => {
+    async function getDataUser() {
+      const { data } = await axios.get(API_BASE_URL + "/datauser" + user._id);
+      console.log(data);
+      setDataUser(data);
+    }
+  });
 
   return (
     <div className="singleProduct">
