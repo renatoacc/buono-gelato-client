@@ -2,7 +2,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { API_BASE_URL } from "../../consts";
-import { AuthContext } from "../../context/AuthProvider";
+import Upload from "./UploadImage";
+ import { AuthContext } from "../../context/AuthProvider";
 
 export default function Product() {
   const params = useParams();
@@ -53,6 +54,7 @@ export default function Product() {
     <div className="singleProduct">
       <h1>{oneProduct.name}</h1>
       <p>{oneProduct.description}</p>
+      <img src={oneProduct.productImage} alt={oneProduct.name}/>
       <p>{oneProduct.price}€</p>
       <input
         className="quantity"
