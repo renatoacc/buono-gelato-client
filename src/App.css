@@ -81,3 +81,25 @@
 .text-danger{
   color: red;
 }
+
+.singleProduct{
+  display: flex;
+  font-family: Raleway;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.quantity{
+  display: flex;
+  font-family: Raleway;
+  width: 80vw;
+  height: 3vh;
+  margin: 5px;
+  border-radius: 15vw;
+  text-align: center;
+  font-size: 16px;
+  border: none;
+  color:#133b60;
+  box-shadow: 2px 1px 2px 1px #46464610;
+}

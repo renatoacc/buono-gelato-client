@@ -1,7 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../consts";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "../../assets/img/logo.png";
 
@@ -91,8 +90,7 @@ export default function Signup() {
     event.preventDefault();
     const finalUser = { ...user, password: passwordInput.password };
     try {
-      const response = await axios.post(API_BASE_URL + "/signup", finalUser);
-      console.log(response.data);
+      await axios.post(API_BASE_URL + "/signup", finalUser);
       navigate("/login");
     } catch (erro) {
       setError({ message: erro.response.data.errorMessage });
@@ -183,9 +181,9 @@ export default function Signup() {
           Signup
         </button>
         <br />
-        <a className="link" href="/login">
+        <Link className="link" to={"/login"}>
           Login
-        </a>
+        </Link>
       </form>
     </div>
   );

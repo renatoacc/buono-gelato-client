@@ -7,6 +7,7 @@ export function AuthProvider(props) {
 
   const addUserToContext = (newUser) => {
     if (user !== null) return;
+    console.log(newUser);
     setUser(newUser);
   };
 

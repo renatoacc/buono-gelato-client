@@ -1,7 +1,7 @@
 import logo from "../../assets/img/logo.png";
 import axios from "axios";
 import { API_BASE_URL, getCsrfToken } from "../../consts";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import { useContext, useState } from "react";
 
@@ -52,9 +52,9 @@ export default function Login() {
         />
 
         <button className="buttonsBuono">Login</button>
-        <a className="link" href="/signup">
+        <Link className="link" to={"/signup"}>
           Signup
-        </a>
+        </Link>
       </form>
     </div>
   );

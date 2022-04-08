@@ -8,9 +8,9 @@ import { CountryContext } from "./context/CountryProvider";
 import Login from "./components/clients/Login";
 import Profile from "./components/clients/Profile";
 import Shop from "./components/clients/Shop";
-import { AuthContext } from "./context/AuthProvider";
 import { getCsrfToken } from "./consts";
 import Product from "./components/clients/Product";
+import Cart from "./components/clients/Cart";
 
 function App() {
   const { country, toggleCountry } = useContext(CountryContext);
@@ -29,6 +29,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<Product />} />
+          <Route path="cart" element={<Cart />} />
         </Route>
       </Routes>
     </div>
