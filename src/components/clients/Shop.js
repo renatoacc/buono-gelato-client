@@ -1,21 +1,29 @@
 import { API_BASE_URL } from "../../consts";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext); // logout , removeUserFromContext
+  const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
 
-  useEffect(() => {
-    console.log(user);
-    if (!user) {
+  async function getUser() {
+    const { data } = await axios.get(API_BASE_URL + "/logged");
+    if (data) {
+      addUserToContext(data);
+    } else {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }
+
+  useEffect(() => {
+    if (!user) {
+      getUser();
+    }
+  }, []);
 
   const handleSearch = (event) => {
     setFilter(event.target.value);
@@ -60,9 +68,9 @@ export default function Shop() {
           .map((elem) => {
             return (
               <div key={elem._id}>
-                <a href={"/product/" + elem._id} className="link">
+                <Link to={"/product/" + elem._id} className="link">
                   <h1>{elem.name}</h1>
-                </a>
+                </Link>
                 <p>{elem.description}</p>
                 <p>{elem.price}€</p>
               </div>

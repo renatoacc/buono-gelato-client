@@ -132,14 +132,14 @@ export default function Signup() {
         />
         <input
           name="postcode"
-          type=""
+          type="number"
           value={user.postcode}
           placeholder="ZIP Code"
           onChange={handleUserState}
         />
         <input
           name="vat"
-          type=""
+          type="number"
           value={user.vat}
           placeholder="VAT Number"
           onChange={handleUserState}
