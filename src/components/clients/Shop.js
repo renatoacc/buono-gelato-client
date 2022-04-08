@@ -49,7 +49,7 @@ export default function Shop() {
           .map((elem) => {
             return (
               <div key={elem._id}>
-                <a href="/product" className="link">
+                <a href={"/product/" + elem._id} className="link">
                   <h1>{elem.name}</h1>
                 </a>
                 <p>{elem.description}</p>
