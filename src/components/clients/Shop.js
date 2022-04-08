@@ -1,10 +1,21 @@
 import { API_BASE_URL } from "../../consts";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState("");
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext); // logout , removeUserFromContext
+
+  useEffect(() => {
+    console.log(user);
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
   const handleSearch = (event) => {
     setFilter(event.target.value);

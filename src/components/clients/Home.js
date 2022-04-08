@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
 import Logo from "../../assets/img/logo.png";
 
 export default function Home() {
   return (
     <div className="layout">
       <img className="imgLogo" src={Logo} alt="Buono Gelato" />
-      <a className="buttonsBuono" href="/login">
+      <Link className="buttonsBuono" to={"/login"}>
         Login
-      </a>
-      <a className="link" href="/signup">
+      </Link>
+      <Link className="link" to={"/signup"}>
         Signup
-      </a>
+      </Link>
     </div>
   );
 }
