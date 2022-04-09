@@ -16,10 +16,10 @@ export default function CreateIngredient(){
   
     const handleSubmitProduct = async (event) => {
       event.preventDefault();
-      const newProduct = { ...ingredient,[event.target.name]: event.target.value  };
-      console.log(newProduct)
+      const newIngredient = { ...ingredient,[event.target.name]: event.target.value  };
+      console.log(newIngredient)
       try {
-        await axios.post(API_BASE_URL + "/ingredients", newProduct);
+        await axios.post(API_BASE_URL + "/ingredients", newIngredient);
         navigate("/showingredients");
       } catch (error) {
         setError({ message: error.response.data.errorMessage });
@@ -28,7 +28,7 @@ export default function CreateIngredient(){
   
       return(
         <>
-        <h1>Create new Product</h1>
+        <h1>Create new Ingredient</h1>
         <form onSubmit={handleSubmitProduct}>
         <input
           name="name"
@@ -38,9 +38,9 @@ export default function CreateIngredient(){
           onChange={handleCreateProduct}
         />
         <input
-          name="typeProduct"
+          name="typeIngredient"
           type="text"
-          value={ingredient.typeProduct}
+          value={ingredient.typeIngredient}
           placeholder="Type of the ingredient"
           onChange={handleCreateProduct}
         />
@@ -58,15 +58,6 @@ export default function CreateIngredient(){
           placeholder="Price"
           onChange={handleCreateProduct}
         />
-         {/* <input
-          name="productImage"
-          type="file"
-          value={ingredient.productImage}
-          placeholder="Image"
-          onChange={upload}
-  
-        /> */}
-         {/* <Upload value={ingredient.productImage}/> */}
         
         <button className="buttonsBuono" type="submit">
           Create
