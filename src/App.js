@@ -11,6 +11,8 @@ import Shop from "./components/clients/Shop";
 import { getCsrfToken } from "./consts";
 import Product from "./components/clients/Product";
 import Cart from "./components/clients/Cart";
+import CreateProduct from "./components/admin/ProductsManage";
+import Upload from "./components/clients/UploadImage";
 
 function App() {
   const { country, toggleCountry } = useContext(CountryContext);
@@ -30,6 +32,7 @@ function App() {
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<Product />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="products" element={<CreateProduct />} />
         </Route>
       </Routes>
     </div>
