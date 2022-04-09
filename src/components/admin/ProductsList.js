@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../../consts";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 export default function ShowProducts() {
@@ -9,7 +9,7 @@ export default function ShowProducts() {
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
   const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
-
+const params = useParams();
 //   async function getUser() {
 //     const { data } = await axios.get(API_BASE_URL + "/logged");
 //     if (data) {
@@ -24,6 +24,30 @@ export default function ShowProducts() {
 //       getUser();
 //     }
 //   }, []);
+
+
+const handleDeleteProduct = (event) =>{
+   
+        try {  
+        async function deleteProduct(){ 
+        await axios.post(API_BASE_URL + "/products/delete/" + params.id)
+        navigate("/showproducts");
+        }
+        deleteProduct();
+        } catch (error) {
+          console.error("Error in updating the todo on the server!", error);
+        }
+      };
+     
+
+// const deleteProduct = async (event) => {
+//     try {
+//      await axios.post(API_BASE_URL + "/products/delete/" + params.id)
+//      //navigate("/showproducts");
+//     } catch (error) {
+//       console.error("Error in updating the todo on the server!", error);
+//     }
+//   };
 
   const handleSearch = (event) => {
     setFilter(event.target.value);
@@ -53,7 +77,7 @@ export default function ShowProducts() {
     }
     listProducts();
   }, []);
-  console.log(products);
+ 
   return (
     <div>
       <h1>Menu</h1>
@@ -68,9 +92,19 @@ export default function ShowProducts() {
           .map((elem) => {
             return (
               <div key={elem._id}>
-                <Link to={"/product/" + elem._id} className="link">
-                  <h1>{elem.name}</h1>
+                <Link to={"/products/" + elem._id} className="link">
+                <button className="buttonsBuono" type="submit">
+                 Edit
+                </button>
                 </Link>
+               
+                <Link to={"/products/delete/" + elem._id} className="link">
+                <button className="buttonsBuono" onClick={handleDeleteProduct}>
+                 Delete
+                </button>
+                </Link>
+
+                <h1>{elem.name}</h1>
                 <p>{elem.description}</p>
                 <p>{elem.price}€</p>
               </div>
