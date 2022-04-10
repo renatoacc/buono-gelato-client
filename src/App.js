@@ -12,7 +12,6 @@ import { getCsrfToken } from "./consts";
 import Product from "./components/clients/Product";
 import Cart from "./components/clients/Cart";
 import CreateProduct from "./components/admin/ProductsManage";
-import Upload from "./components/clients/UploadImage";
 import CreateIngredient from "./components/admin/IngredientsManage";
 import ShowProducts from "./components/admin/ProductsList";
 import ShowIngredients from "./components/admin/IngredientsList";
@@ -37,8 +36,8 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="products" element={<CreateProduct />} />
           <Route path="ingredients" element={<CreateIngredient />} />
-          <Route path="showproducts" element ={<ShowProducts />} />
-          <Route path="showingredients" element ={<ShowIngredients />} />
+          <Route path="showproducts" element={<ShowProducts />} />
+          <Route path="showingredients" element={<ShowIngredients />} />
         </Route>
       </Routes>
     </div>
