@@ -6,9 +6,6 @@ import { AuthContext } from "../../context/AuthProvider";
 
 export default function Cart() {
   const [shoppingCart, setShoppingCart] = useState(null);
-  const [numberOrderArray, setNumberOrderArray] = useState([
-    ...Array(100).keys(),
-  ]);
   const navigate = useNavigate();
   const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
 
@@ -26,22 +23,28 @@ export default function Cart() {
     setShoppingCart(data);
   }
 
-  async function numberOrder() {
-    const data = await axios.get(API_BASE_URL + "/number/order");
-    const newArray = numberOrderArray.splice(0, data.length);
-    setNumberOrderArray(newArray);
-  }
-
   useEffect(() => {
     if (!user) {
       getUser();
     } else {
       getCart();
-      numberOrder();
     }
   }, [user]);
 
-  console.log("ORDER NUMBER ARRAY: ", numberOrderArray);
+  const handleCreateOrder = (event) => {
+    try {
+      async function postCreateOrder() {
+        await axios.post(API_BASE_URL + "/order", shoppingCart);
+        await axios.put(API_BASE_URL + "/deleteCart/" + user._id);
+        navigate("/profile");
+        console.log("order success!");
+      }
+      postCreateOrder();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   console.log("Data form database, user cart:", shoppingCart);
 
   return (
@@ -70,7 +73,9 @@ export default function Cart() {
           <td></td>
         </tr>
       </table>
-      <button className="buttonsBuono">Order</button>
+      <button className="buttonsBuono" onClick={handleCreateOrder}>
+        Order
+      </button>
     </div>
   );
 }

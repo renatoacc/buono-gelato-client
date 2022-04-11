@@ -19,11 +19,22 @@ export default function Shop() {
     }
   }
 
+  async function listProducts() {
+    try {
+      const { data } = await axios.get(API_BASE_URL + "/shop");
+      setProducts(data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+
   useEffect(() => {
     if (!user) {
       getUser();
+    } else {
+      listProducts();
     }
-  }, []);
+  }, [user]);
 
   const handleSearch = (event) => {
     setFilter(event.target.value);
@@ -42,18 +53,6 @@ export default function Shop() {
     getData();
   }, [filter]);
 
-  useEffect(() => {
-    async function listProducts() {
-      try {
-        const { data } = await axios.get(API_BASE_URL + "/shop");
-        setProducts(data);
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    }
-    listProducts();
-  }, []);
-  console.log(products);
   return (
     <div>
       <h1>Menu</h1>
