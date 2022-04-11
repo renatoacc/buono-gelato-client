@@ -5,7 +5,7 @@ import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
 
 export default function Cart() {
-  const [shoppingCart, setShoppingCart] = useState({});
+  const [shoppingCart, setShoppingCart] = useState(null);
   const navigate = useNavigate();
   const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
 
@@ -18,19 +18,32 @@ export default function Cart() {
     }
   }
 
+  async function getCart() {
+    const { data } = await axios.get(API_BASE_URL + "/cart" + user._id);
+    setShoppingCart(data);
+  }
+
   useEffect(() => {
     if (!user) {
       getUser();
+    } else {
+      getCart();
     }
-  }, []);
+  }, [user]);
 
-  useEffect(() => {
-    async function getCart() {
-      const { data } = await axios.get(API_BASE_URL + "/cart/" + user._id);
-      setShoppingCart(data);
+  const handleCreateOrder = (event) => {
+    try {
+      async function postCreateOrder() {
+        await axios.post(API_BASE_URL + "/order", shoppingCart);
+        await axios.put(API_BASE_URL + "/deleteCart/" + user._id);
+        navigate("/profile");
+        console.log("order success!");
+      }
+      postCreateOrder();
+    } catch (error) {
+      console.error(error);
     }
-    getCart();
-  }, []);
+  };
 
   console.log("Data form database, user cart:", shoppingCart);
 
@@ -44,18 +57,15 @@ export default function Cart() {
           <th>Price/uni</th>
           <th>Total</th>
         </tr>
-        {shoppingCart.cart.map((elem) => {
-          return (
-            <>
-              <tr>
-                <td>{elem.quantity}</td>
-                <td>{elem.name}</td>
-                <td>{elem.price}€</td>
-                <td>{elem.price * elem.quantity}€</td>
-              </tr>
-            </>
-          );
-        })}
+        {shoppingCart &&
+          shoppingCart.cart.map((elem) => (
+            <tr key={elem._id}>
+              <td>{elem.quantity}</td>
+              <td>{elem.name}</td>
+              <td>{elem.price}€</td>
+              <td>{elem.price * elem.quantity}€</td>
+            </tr>
+          ))}
         <tr>
           <td></td>
           <td></td>
@@ -63,6 +73,9 @@ export default function Cart() {
           <td></td>
         </tr>
       </table>
+      <button className="buttonsBuono" onClick={handleCreateOrder}>
+        Order
+      </button>
     </div>
   );
 }
