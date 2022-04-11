@@ -6,7 +6,7 @@ import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
 import { useContext } from "react";
 
-export default function LayoutComponent() {
+export default function LayoutComponentAdmin() {
   const navigate = useNavigate();
   const { removeUserFromContext } = useContext(AuthContext);
 
@@ -30,31 +30,24 @@ export default function LayoutComponent() {
           <div className="nav__menu" id="nav-menu">
             <ul className="nav__list">
               <li className="nav__item">
-                <Link to="./profile" className="nav__link">
-                  <box-icon className="nav__icon" name="user"></box-icon>
-                  <span className="nav__name">Profile</span>
+                <Link to="./products" className="nav__link">
+                  <box-icon className="nav__icon" name="list-ul"></box-icon>
+                  <span className="nav__name">Products</span>
                 </Link>
               </li>
               <li className="nav__item">
-                <Link to="./shop" className="nav__link">
+                <Link to="./ingredients" className="nav__link">
+                  <box-icon className="nav__icon" name="list-ul"></box-icon>
+                  <span className="nav__name">Ingredients</span>
+                </Link>
+              </li>
+              <li className="nav__item">
+                <Link to="./*" className="nav__link">
                   <box-icon
                     className="nav__icon"
-                    type="solid"
-                    name="store"
+                    name="book-content"
                   ></box-icon>
-                  <span className="nav__name">Shop</span>
-                </Link>
-              </li>
-              <li className="nav__item">
-                <Link to="./cart" className="nav__link">
-                  <box-icon className="nav__icon" name="cart-alt"></box-icon>
-                  <span className="nav__name">Cart</span>
-                </Link>
-              </li>
-              <li className="nav__item">
-                <Link to="./favorit" className="nav__link">
-                  <box-icon className="nav__icon" name="heart"></box-icon>
-                  <span className="nav__name">Favorit</span>
+                  <span className="nav__name">Ordes</span>
                 </Link>
               </li>
               <li className="nav__item">

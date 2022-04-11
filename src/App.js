@@ -19,7 +19,11 @@ import ShowIngredients from "./components/admin/IngredientsList";
 import "boxicons";
 import UpdateIngredient from "./components/admin/IngredientsUpdating";
 import UpdateProduct from "./components/admin/ProductsUpdating";
+
+import LayoutComponentAdmin from "./components/admin/LayoutComponentAdmin";
+
 import ShowOrders from "./components/admin/ViewOrders";
+
 
 function App() {
   const { country, toggleCountry } = useContext(CountryContext);
@@ -40,13 +44,17 @@ function App() {
           <Route path="product/:id" element={<Product />} />
           <Route path="favorit" element={<ListFavorit />} />
           <Route path="cart" element={<Cart />} />
+        </Route>
+        <Route element={<LayoutComponentAdmin />}>
           <Route path="products" element={<CreateProduct />} />
           <Route path="ingredients" element={<CreateIngredient />} />
+
           <Route path="showproducts" element ={<ShowProducts />} />
           <Route path="showingredients" element ={<ShowIngredients />} />
           <Route path="products/:id" element ={<UpdateProduct/>} />
           <Route path="ingredients/:id" element ={<UpdateIngredient/>} />
           <Route path="/vieworders" element={<ShowOrders />} />
+
         </Route>
       </Routes>
     </div>

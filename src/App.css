@@ -53,6 +53,11 @@ body{
   background-color: var(--body-color);
   color: var(--text-color);
 }
+button{
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+}
 
 ul{
   list-style: none;
