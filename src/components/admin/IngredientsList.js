@@ -68,9 +68,13 @@ export default function ShowIngredients() {
           .map((elem) => {
             return (
               <div key={elem._id}>
-                <Link to={"/igredient/" + elem._id} className="link">
-                  <h1>{elem.name}</h1>
+                <Link to={"/ingredients/" + elem._id} className="link">
+                <button className="buttonsBuono" >Edit</button>
                 </Link>
+                <Link to={"/ingredients/delete/" + elem._id} className="link">
+                <button className="buttonsBuono" >Delete</button>
+                </Link>
+                <h1>{elem.name}</h1>
                 <p>{elem.description}</p>
                 <p>{elem.price}€</p>
               </div>

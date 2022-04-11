@@ -27,13 +27,12 @@ const params = useParams();
 
 
 const handleDeleteProduct = (event) =>{
-   
         try {  
         async function deleteProduct(){ 
         await axios.post(API_BASE_URL + "/products/delete/" + params.id)
-        navigate("/showproducts");
         }
         deleteProduct();
+        navigate("/showproducts");
         } catch (error) {
           console.error("Error in updating the todo on the server!", error);
         }
@@ -92,6 +91,11 @@ const handleDeleteProduct = (event) =>{
           .map((elem) => {
             return (
               <div key={elem._id}>
+              
+                <h1>{elem.name}</h1>
+                <p>{elem.description}</p>
+                <p>{elem.price}€</p>
+
                 <Link to={"/products/" + elem._id} className="link">
                 <button className="buttonsBuono" type="submit">
                  Edit
@@ -103,10 +107,6 @@ const handleDeleteProduct = (event) =>{
                  Delete
                 </button>
                 </Link>
-
-                <h1>{elem.name}</h1>
-                <p>{elem.description}</p>
-                <p>{elem.price}€</p>
               </div>
             );
           })
