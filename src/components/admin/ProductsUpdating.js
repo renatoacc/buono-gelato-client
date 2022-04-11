@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../consts";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function UpdateProduct(){
     const params = useParams();
@@ -13,6 +13,13 @@ export default function UpdateProduct(){
   const navigate = useNavigate();
   const [error, setError] = useState();
 
+  useEffect(() => {
+    async function getData() {
+      const { data } = await axios.get(API_BASE_URL + "/products/" + params.id);
+      setProduct(data);
+    }
+    getData();
+  }, [params]);
   
   const handleSubmitProduct = async (event) => {
     event.preventDefault();
@@ -65,6 +72,11 @@ export default function UpdateProduct(){
         Update
       </button>
       </form>
+      <Link to={"/showproducts"} className="link">
+                <button className="buttonsBuono" type="submit">
+               Back
+                </button>
+                </Link>
       </>
     )
 }

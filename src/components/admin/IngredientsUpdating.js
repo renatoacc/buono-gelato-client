@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../consts";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function UpdateIngredient(){
     const params = useParams();
@@ -12,7 +12,14 @@ export default function UpdateIngredient(){
   };
   const navigate = useNavigate();
   const [error, setError] = useState();
-
+  
+  useEffect(() => {
+    async function getData() {
+      const { data } = await axios.get(API_BASE_URL + "/ingredients/" + params.id);
+      setIngredient(data);
+    }
+    getData();
+  }, [params]);
   
   const handleSubmitIngredient = async (event) => {
     event.preventDefault();
@@ -29,6 +36,7 @@ export default function UpdateIngredient(){
     return(
       <>
       <h1>Update Ingredient</h1>
+
       <form onSubmit={handleSubmitIngredient}>
       <input
         name="name"

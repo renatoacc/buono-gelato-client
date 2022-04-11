@@ -41,11 +41,10 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="products" element={<CreateProduct />} />
           <Route path="ingredients" element={<CreateIngredient />} />
-          <Route path="showproducts" element={<ShowProducts />} />
-          <Route path="showingredients" element={<ShowIngredients />} />
-          <Route path="products/:id" element={<UpdateProduct />} />
-          <Route path="products/delete/:id" element={<ShowProducts />} />
-          <Route path="ingredients/:id" element={<UpdateIngredient />} />
+          <Route path="showproducts" element ={<ShowProducts />} />
+          <Route path="showingredients" element ={<ShowIngredients />} />
+          <Route path="products/:id" element ={<UpdateProduct/>} />
+          <Route path="ingredients/:id" element ={<UpdateIngredient/>} />
         </Route>
       </Routes>
     </div>
