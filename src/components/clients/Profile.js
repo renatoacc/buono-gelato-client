@@ -25,14 +25,12 @@ export default function Profile() {
 
   return (
     <div>
-
+      <h1>Profile Page</h1>
+      <p>Link testes</p>
       <Link to={"/showproducts"}>Products</Link>
       <Link to={"/products"}>Create products</Link>
       <Link to={"/showingredients"}>Ingredients</Link>
       <Link to={"/ingredients"}>Create ingredients</Link>
-
-      <Link to={"/shop"}>shop</Link> <Link to={"/cart"}>cart</Link>Profile
-
     </div>
   );
 }

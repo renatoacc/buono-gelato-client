@@ -9,13 +9,14 @@ import Login from "./components/clients/Login";
 import Profile from "./components/clients/Profile";
 import Shop from "./components/clients/Shop";
 import { getCsrfToken } from "./consts";
+import ListFavorit from "./components/clients/ListFavorit";
 import Product from "./components/clients/Product";
 import Cart from "./components/clients/Cart";
 import CreateProduct from "./components/admin/ProductsManage";
 import CreateIngredient from "./components/admin/IngredientsManage";
 import ShowProducts from "./components/admin/ProductsList";
 import ShowIngredients from "./components/admin/IngredientsList";
-
+import "boxicons";
 import UpdateIngredient from "./components/admin/IngredientsUpdating";
 import UpdateProduct from "./components/admin/ProductsUpdating";
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<Product />} />
+          <Route path="favorit" element={<ListFavorit />} />
           <Route path="cart" element={<Cart />} />
           <Route path="products" element={<CreateProduct />} />
           <Route path="ingredients" element={<CreateIngredient />} />
