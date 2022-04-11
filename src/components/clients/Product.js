@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
@@ -57,6 +57,7 @@ export default function Product() {
     try {
       async function postProductCart() {
         await axios.put(API_BASE_URL + "/addCart", dataUser);
+        navigate("/product");
       }
       postProductCart();
     } catch (error) {
