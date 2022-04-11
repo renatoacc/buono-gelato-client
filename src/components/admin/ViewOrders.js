@@ -6,64 +6,66 @@ import { AuthContext } from "../../context/AuthProvider";
 
 export default function ShowOrders() {
     const [orders, setOrders] = useState([]);
-    const [filter, setFilter] = useState("");
-    // const navigate = useNavigate();
-    // const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
+ 
+    const navigate = useNavigate();
+    const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
     // const params = useParams();
+    async function getUser() {
+      const { data } = await axios.get(API_BASE_URL + "/logged");
+      if (data) {
+        addUserToContext(data);
+      } else {
+        navigate("/login");
+      }
+    }
+   
+  async function listOrders() {
+    try {
+      const { data } = await axios.get(API_BASE_URL + "/vieworders");
+      setOrders(data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+ 
+  }
 
-    const handleSearch = (event) => {
-        setFilter(event.target.value);
-      };
+
     useEffect(() => {
-        async function getData() {
-          try {
-            const { data } = await axios.get(
-              API_BASE_URL + "/vieworders" + filter.trim()
-            );
-            setOrders(data);
-          } catch (error) {
-            console.error("Search error form api.", error);
-          }
-        }
-        getData();
-      }, [filter]);
+      if (!user) {
+        getUser();
+      } else{
+        listOrders();
+      }
+    }, [user]);
+    console.log(orders)
+    // const handleSearch = (event) => {
+    //     setFilter(event.target.value);
+   
+   
 
       return (
         <div>
           <h1>Orders</h1>
           {orders.length === 0 ? (
-            <h1> Sorry, we don't orders </h1>
+            <h1> Sorry, you don't have orders </h1>
           ) : (
             orders
-              .filter((elem) => {
-                const search = filter.toLocaleLowerCase();
-                return elem.name.toLocaleLowerCase().trim().includes(search.trim());
-              })
               .map((elem) => {
-                return (
+                if(elem.checkout === false)
+                return ( 
                   <div key={elem._id}>
-                  
                     <h1>{elem.clientName}</h1>
-                    <p>{elem.products}</p>
-                    <p>{elem.checkout}€</p>
-    
-                  </div>
-                  
+                   {elem.products.map((productElement)=>{
+                     return(<p key={productElement._id}>{productElement.name} x {productElement.quantity}</p>) 
+                   })}
+                    <p>{elem.checkout}</p>
+                    <button className="buttonsBuono" onClick={()=>elem.checkout = true}>checkout</button>
+                  </div> 
                 );
+                
               })
           )}
-
-                <Link to={"/profile"} className="link">
-                <button className="buttonsBuono" type="submit">
-                 Back to Profile
-                </button>
-                </Link>
-          <input
-            value={filter}
-            type="text"
-            placeholder="Search"
-            onChange={handleSearch}
-          />
+          
         </div>
       );
     }
