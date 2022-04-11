@@ -58,20 +58,8 @@ const handleDeleteProduct = (e, elem_id) =>{
       }
     }
     getData();
-  }, [filter,params]);
+  }, [filter]);
 
-  useEffect(() => {
-    async function listProducts() {
-      try {
-        const { data } = await axios.get(API_BASE_URL + "/showproducts");
-        setProducts(data);
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    }
-    listProducts();
-  }, []);
- 
   return (
     <div>
       <h1>Products</h1>
