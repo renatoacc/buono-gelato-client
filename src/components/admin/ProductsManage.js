@@ -11,18 +11,15 @@ export default function CreateProduct(){
   const [product, setProduct] = useState({});
   const handleCreateProduct = (event) => {
     setProduct({ ...product, [event.target.name]: event.target.value });
-
   };
+
   const navigate = useNavigate();
   const [error, setError] = useState();
 
 
   const handleSubmitProduct = async (event) => {
     event.preventDefault();
-    console.log(event.target)
     const newProduct = { ...product,[event.target.name]: event.target.value };
-  
-   console.log(newProduct)
     try {
       await axios.post(API_BASE_URL + "/products", newProduct);
       navigate("/showproducts");
@@ -61,7 +58,7 @@ export default function CreateProduct(){
         placeholder="Price"
         onChange={handleCreateProduct}
       />
-      <input name="productImage" type="file" value={product.productImage} onChange={handleCreateProduct} />
+      <input name="productImage" type="file"  onChange={handleCreateProduct} />
       
       <button className="buttonsBuono" type="submit">
         Create
