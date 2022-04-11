@@ -15,7 +15,9 @@ import CreateProduct from "./components/admin/ProductsManage";
 import CreateIngredient from "./components/admin/IngredientsManage";
 import ShowProducts from "./components/admin/ProductsList";
 import ShowIngredients from "./components/admin/IngredientsList";
-import ProductsUpdating from "./components/admin/ProductsUpdating";
+
+import UpdateIngredient from "./components/admin/IngredientsUpdating";
+import UpdateProduct from "./components/admin/ProductsUpdating";
 
 function App() {
   const { country, toggleCountry } = useContext(CountryContext);
@@ -39,8 +41,9 @@ function App() {
           <Route path="ingredients" element={<CreateIngredient />} />
           <Route path="showproducts" element ={<ShowProducts />} />
           <Route path="showingredients" element ={<ShowIngredients />} />
-          <Route path="products/:id" element ={<ProductsUpdating/>} />
+          <Route path="products/:id" element ={<UpdateProduct/>} />
           <Route path="products/delete/:id" element={<ShowProducts />} />
+          <Route path="ingredients/:id" element ={<UpdateIngredient/>} />
         </Route>
       </Routes>
     </div>
