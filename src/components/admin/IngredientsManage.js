@@ -37,13 +37,12 @@ export default function CreateIngredient(){
           placeholder="Name"
           onChange={handleCreateProduct}
         />
-        <input
-          name="typeIngredient"
-          type="text"
-          value={ingredient.typeIngredient}
-          placeholder="Type of the ingredient"
-          onChange={handleCreateProduct}
-        />
+        <select name="typeIngredient" id="typeIngredient">
+        <option value={ingredient.typeIngredient = "Topping"}>Topping</option>
+        <option value={ingredient.typeIngredient = "Ice-Cream"}>Ice-Cream</option>
+        <option value={ingredient.typeIngredient = "Crunchy"}>Crunchy</option>
+        </select>
+      
         <input
           name="description"
           type="text"
