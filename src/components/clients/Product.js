@@ -57,7 +57,7 @@ export default function Product() {
     try {
       async function postProductCart() {
         await axios.put(API_BASE_URL + "/addCart", dataUser);
-        navigate("/product");
+        navigate("/product/" + params.id);
       }
       postProductCart();
     } catch (error) {
