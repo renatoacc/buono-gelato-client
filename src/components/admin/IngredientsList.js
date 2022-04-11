@@ -25,6 +25,23 @@ export default function ShowIngredients() {
 //     }
 //   }, []);
 
+const handleDeleteIngredients = (e, elem_id) =>{
+  e.preventDefault()
+  try {  
+  async function deleteIngredients(){ 
+  await axios.post(API_BASE_URL + "/ingredients/delete/" + elem_id)
+  }
+  deleteIngredients();
+  const filteredingredients = ingredients.filter((elem)=> {return elem._id != elem_id})
+  setIngredients(filteredingredients)
+  navigate("/showingredients");
+  
+  } catch (error) {
+    console.error("Error in updating ingredients on the server!", error);
+  }
+};
+
+
   const handleSearch = (event) => {
     setFilter(event.target.value);
   };
@@ -53,10 +70,16 @@ export default function ShowIngredients() {
     }
     listIngredients();
   }, []);
-  console.log(ingredients);
+ 
+
   return (
     <div>
-      <h1>Menu</h1>
+      <h1>Ingredients</h1>
+      <Link to={"/ingredients"} className="link">
+                <button className="buttonsBuono" type="submit">
+                 Create New Ingredient
+                </button>
+                </Link>
       {ingredients.length === 0 ? (
         <h1> Sorry, we don't have this ingredient </h1>
       ) : (
@@ -68,15 +91,16 @@ export default function ShowIngredients() {
           .map((elem) => {
             return (
               <div key={elem._id}>
-                <Link to={"/ingredients/" + elem._id} className="link">
-                <button className="buttonsBuono" >Edit</button>
-                </Link>
-                <Link to={"/ingredients/delete/" + elem._id} className="link">
-                <button className="buttonsBuono" >Delete</button>
-                </Link>
+              
                 <h1>{elem.name}</h1>
                 <p>{elem.description}</p>
                 <p>{elem.price}€</p>
+                <Link to={"/ingredients/" + elem._id} className="link">
+                <button className="buttonsBuono" >Edit</button>
+                </Link>
+              
+                <button className="buttonsBuono" onClick={(e)=>{handleDeleteIngredients(e,elem._id)}} >Delete</button>
+                
               </div>
             );
           })

@@ -9,7 +9,7 @@ export default function ShowProducts() {
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
   const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
-const params = useParams();
+  const params = useParams();
 //   async function getUser() {
 //     const { data } = await axios.get(API_BASE_URL + "/logged");
 //     if (data) {
@@ -26,13 +26,17 @@ const params = useParams();
 //   }, []);
 
 
-const handleDeleteProduct = (event) =>{
+const handleDeleteProduct = (e, elem_id) =>{
+        e.preventDefault()
         try {  
         async function deleteProduct(){ 
-        await axios.post(API_BASE_URL + "/products/delete/" + params.id)
+        await axios.post(API_BASE_URL + "/products/delete/" + elem_id)
         }
         deleteProduct();
+        const filteredProducts = products.filter((elem)=> {return elem._id != elem_id})
+        setProducts(filteredProducts)
         navigate("/showproducts");
+        
         } catch (error) {
           console.error("Error in updating the todo on the server!", error);
         }
@@ -63,7 +67,7 @@ const handleDeleteProduct = (event) =>{
       }
     }
     getData();
-  }, [filter]);
+  }, [filter,params]);
 
   useEffect(() => {
     async function listProducts() {
@@ -79,7 +83,12 @@ const handleDeleteProduct = (event) =>{
  
   return (
     <div>
-      <h1>Menu</h1>
+      <h1>Products</h1>
+      <Link to={"/products"} className="link">
+                <button className="buttonsBuono" type="submit">
+                 Create New Product
+                </button>
+                </Link>
       {products.length === 0 ? (
         <h1> Sorry, we don't have this product </h1>
       ) : (
@@ -101,12 +110,10 @@ const handleDeleteProduct = (event) =>{
                  Edit
                 </button>
                 </Link>
-               
-                <Link to={"/products/delete/" + elem._id} className="link">
-                <button className="buttonsBuono" onClick={handleDeleteProduct}>
+                <button className="buttonsBuono" onClick={(e)=>{handleDeleteProduct(e,elem._id)}}>
                  Delete
                 </button>
-                </Link>
+                {/* </Link> */}
               </div>
             );
           })
