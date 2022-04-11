@@ -43,15 +43,6 @@ const handleDeleteProduct = (e, elem_id) =>{
       };
      
 
-// const deleteProduct = async (event) => {
-//     try {
-//      await axios.post(API_BASE_URL + "/products/delete/" + params.id)
-//      //navigate("/showproducts");
-//     } catch (error) {
-//       console.error("Error in updating the todo on the server!", error);
-//     }
-//   };
-
   const handleSearch = (event) => {
     setFilter(event.target.value);
   };
