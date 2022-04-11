@@ -7,23 +7,34 @@ import { useState } from "react";
 
 
 export default function CreateProduct(){
-    
+  
   const [product, setProduct] = useState({});
   const handleCreateProduct = (event) => {
+    // let image = event.target.product.files[0];
+    // let imageFormData = new FormData();
+    // imageFormData.append("productImage", image);
     setProduct({ ...product, [event.target.name]: event.target.value });
   };
 
   const navigate = useNavigate();
   const [error, setError] = useState();
-
-
+  
+  
   const handleSubmitProduct = async (event) => {
     event.preventDefault();
-    const newProduct = { ...product,[event.target.name]: event.target.value };
+    let image = event.target.productImage.files[0];
+    console.log(image)
+    let imageFormData = new FormData();
+    imageFormData.append("productImage", image);
+    console.log("formData",imageFormData)
+    const newProduct = { ...product,[event.target.name]: event.target.value};
+  
     try {
-      await axios.post(API_BASE_URL + "/products", newProduct);
+      await axios.post(API_BASE_URL + "/products", newProduct, imageFormData, {
+        withCredentials: true,
+      });
       navigate("/showproducts");
-    } catch (erro) {
+    } catch (error) {
       setError({ message: error.response.data.errorMessage });
     }
   };
@@ -31,7 +42,7 @@ export default function CreateProduct(){
     return(
       <>
       <h1>Create new Product</h1>
-      <form onSubmit={handleSubmitProduct}>
+      <form  onSubmit={handleSubmitProduct} method="POST" enctype="multipart/form-data">
       <input
         name="name"
         type="text"
@@ -58,12 +69,13 @@ export default function CreateProduct(){
         placeholder="Price"
         onChange={handleCreateProduct}
       />
-      <input name="productImage" type="file"  onChange={handleCreateProduct} />
-      
+      <input type="file" name="productImage" />
+
       <button className="buttonsBuono" type="submit">
         Create
       </button>
       </form>
+    
       </>
     )
 }
