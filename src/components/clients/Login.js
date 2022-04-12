@@ -32,14 +32,11 @@ export default function Login() {
       navigate("/profile");
       }
     } catch (err) {
-      let eMessage = err.response.data.errorMessage
-      console.log(">>>>>>>>>>>>",err.response.data.errorMessage)
      setErrorState("Email or password don't match...");
     
     }
   };
   
-
   return (
     <div className="formsPage">
       <img src={logo} alt="Buono Gelato" />
