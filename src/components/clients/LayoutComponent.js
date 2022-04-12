@@ -37,13 +37,18 @@ const params = useParams();
             <ul className="nav__list">
               <li className="nav__item">
                 <Link to="./profile" className="nav__link">
-                  <box-icon className="nav__icon" name="user"></box-icon>
+                  <box-icon
+                    color="#133b60"
+                    className="nav__icon"
+                    name="user"
+                  ></box-icon>
                   <span className="nav__name">Profile</span>
                 </Link>
               </li>
               <li className="nav__item">
                 <Link to="./shop" className="nav__link">
                   <box-icon
+                    color="#133b60"
                     className="nav__icon"
                     type="solid"
                     name="store"
@@ -53,13 +58,18 @@ const params = useParams();
               </li>
               <li className="nav__item">
                 <Link to="./cart" className="nav__link">
-                  <box-icon className="nav__icon" name="cart-alt"></box-icon>
+                  <box-icon
+                    className="nav__icon"
+                    color="#133b60"
+                    name="cart-alt"
+                  ></box-icon>
                   <span className="nav__name">Cart</span>
                 </Link>
               </li>
               <li className="nav__item">
                 <Link to="./favorit" className="nav__link">
                   <box-icon
+                    color="#133b60"
                     className="nav__icon"
                     type="solid"
                     name="heart"
@@ -69,7 +79,11 @@ const params = useParams();
               </li>
               <li className="nav__item">
                 <button className="nav__link" onClick={logout}>
-                  <box-icon className="nav__icon" name="log-out"></box-icon>
+                  <box-icon
+                    className="nav__icon"
+                    color="#133b60"
+                    name="log-out"
+                  ></box-icon>
                   <span className="nav__name">Logout</span>
                 </button>
               </li>

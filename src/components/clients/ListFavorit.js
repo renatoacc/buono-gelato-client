@@ -57,19 +57,23 @@ export default function ListFavorit() {
 
   return (
     <div className="backPage">
-      <h1>Favorit List</h1>
+      <h1 className="titleMenu">Favorites</h1>
       {favorit.favourites.map((elem) => {
         return (
-          <div key={elem._id}>
-            <img src={elem.productImage} alt={elem.name} />
+          <div key={elem._id} className="foodCard">
+            <img
+              className="imageProducts"
+              src={elem.productImage}
+              alt={elem.name}
+            />
             <h1>{elem.name}</h1>
-            <p>{elem.description}</p>
+            <p className="description">{elem.description}</p>
             <button
               onClick={(event) => {
                 handlerRemoveFav(event, elem._id);
               }}
             >
-              <box-icon type="solid" name="heart"></box-icon>
+              <box-icon type="solid" color="#133b60" name="heart"></box-icon>
             </button>
           </div>
         );
