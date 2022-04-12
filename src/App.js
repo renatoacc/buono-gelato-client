@@ -48,7 +48,7 @@ function App() {
         <Route element={<LayoutComponentAdmin />}>
           <Route path="products" element={<CreateProduct />} />
           <Route path="ingredients" element={<CreateIngredient />} />
-
+          <Route path="vieworders/:id" element ={<ShowOrders/>} />
           <Route path="showproducts" element ={<ShowProducts />} />
           <Route path="showingredients" element ={<ShowIngredients />} />
           <Route path="products/:id" element ={<UpdateProduct/>} />

@@ -7,12 +7,10 @@ import { useState } from "react";
 
 
 export default function CreateProduct(){
-  
+ 
   const [product, setProduct] = useState({});
   const handleCreateProduct = (event) => {
-    // let image = event.target.product.files[0];
-    // let imageFormData = new FormData();
-    // imageFormData.append("productImage", image);
+   
     setProduct({ ...product, [event.target.name]: event.target.value });
   };
 
@@ -23,14 +21,26 @@ export default function CreateProduct(){
   const handleSubmitProduct = async (event) => {
     event.preventDefault();
     let image = event.target.productImage.files[0];
-    console.log(image)
+    // console.log(image)
     let imageFormData = new FormData();
     imageFormData.append("productImage", image);
-    console.log("formData",imageFormData)
-    const newProduct = { ...product,[event.target.name]: event.target.value};
-  
+    imageFormData.append("name", product.name);
+    imageFormData.append("typeProduct", product.typeProduct);
+    imageFormData.append("description", product.description,);
+    imageFormData.append("price", product.price,);
+    // console.log("formData",imageFormData)
+    // const newProduct =
+    // {
+    //   name:product.name,
+    //   typeProduct:product.typeProduct,
+    //   price:product.price,
+    //   description:product.description,
+    //   extraIngredients:product.extraIngredients,
+    //   productImage:image,
+    // }
+   console.log(" NEWPRODUCT" , imageFormData)
     try {
-      await axios.post(API_BASE_URL + "/products", newProduct, imageFormData, {
+      await axios.post(API_BASE_URL + "/products", imageFormData, {
         withCredentials: true,
       });
       navigate("/showproducts");
