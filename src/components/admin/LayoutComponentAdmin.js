@@ -30,19 +30,19 @@ export default function LayoutComponentAdmin() {
           <div className="nav__menu" id="nav-menu">
             <ul className="nav__list">
               <li className="nav__item">
-                <Link to="./products" className="nav__link">
+                <Link to="./showproducts" className="nav__link">
                   <box-icon className="nav__icon" name="list-ul"></box-icon>
                   <span className="nav__name">Products</span>
                 </Link>
               </li>
               <li className="nav__item">
-                <Link to="./ingredients" className="nav__link">
+                <Link to="./showingredients" className="nav__link">
                   <box-icon className="nav__icon" name="list-ul"></box-icon>
                   <span className="nav__name">Ingredients</span>
                 </Link>
               </li>
               <li className="nav__item">
-                <Link to="./*" className="nav__link">
+                <Link to="./vieworders" className="nav__link">
                   <box-icon
                     className="nav__icon"
                     name="book-content"

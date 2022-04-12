@@ -22,10 +22,14 @@ export default function Login() {
     event.preventDefault();
     try {
       const response = await axios.post(API_BASE_URL + "/login", user);
-      console.log(response.data);
+      let userInfo = response.data.user;
       addUserToContext(response.data.user);
       getCsrfToken();
+      if(userInfo.userType === "admin"){
+      navigate("/vieworders")
+      }else{
       navigate("/profile");
+      }
     } catch (err) {
       setErrorState({ message: err.response.data.erroMessage });
     }

@@ -3,13 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import { getNextKeyDef } from "@testing-library/user-event/dist/keyboard/getNextKeyDef";
 
 
 export default function ShowIngredients() {
   const [ingredients, setIngredients] = useState([]);
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
-  const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
+  const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
+
 
 
 const handleDeleteIngredients = (e, elem_id) =>{
@@ -57,7 +59,6 @@ const handleDeleteIngredients = (e, elem_id) =>{
     }
     listIngredients();
   }, []);
- 
 
   return (
     <div>
