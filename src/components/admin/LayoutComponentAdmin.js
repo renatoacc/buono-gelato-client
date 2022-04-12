@@ -31,13 +31,21 @@ export default function LayoutComponentAdmin() {
             <ul className="nav__list">
               <li className="nav__item">
                 <Link to="./showproducts" className="nav__link">
-                  <box-icon className="nav__icon" name="list-ul"></box-icon>
+                  <box-icon
+                    className="nav__icon"
+                    color="#133b60"
+                    name="list-ul"
+                  ></box-icon>
                   <span className="nav__name">Products</span>
                 </Link>
               </li>
               <li className="nav__item">
                 <Link to="./showingredients" className="nav__link">
-                  <box-icon className="nav__icon" name="list-ul"></box-icon>
+                  <box-icon
+                    className="nav__icon"
+                    color="#133b60"
+                    name="list-ul"
+                  ></box-icon>
                   <span className="nav__name">Ingredients</span>
                 </Link>
               </li>
@@ -45,6 +53,7 @@ export default function LayoutComponentAdmin() {
                 <Link to="./vieworders" className="nav__link">
                   <box-icon
                     className="nav__icon"
+                    color="#133b60"
                     name="book-content"
                   ></box-icon>
                   <span className="nav__name">Ordes</span>
@@ -52,7 +61,11 @@ export default function LayoutComponentAdmin() {
               </li>
               <li className="nav__item">
                 <button className="nav__link" onClick={logout}>
-                  <box-icon className="nav__icon" name="log-out"></box-icon>
+                  <box-icon
+                    color="#133b60"
+                    className="nav__icon"
+                    name="log-out"
+                  ></box-icon>
                   <span className="nav__name">Logout</span>
                 </button>
               </li>

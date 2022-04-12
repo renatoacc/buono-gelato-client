@@ -39,7 +39,14 @@ export default function Profile() {
   }, []);
 
   if (userInfo === null) {
-    return <box-icon name="loader-alt"></box-icon>;
+    return (
+      <box-icon
+        name="loader-alt"
+        animation="spin"
+        flip="horizontal"
+        color="#133b60"
+      ></box-icon>
+    );
   }
 
   return (

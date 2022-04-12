@@ -66,11 +66,24 @@ export default function Product() {
   //   }
 
   return (
-    <div className="singleProduct">
-      <img src={oneProduct.productImage} alt={oneProduct.name} />
-      <h1>{oneProduct.name}</h1>
-      <p>{oneProduct.description}</p>
-      <p>{oneProduct.price}€</p>
+    <div className="foodCard">
+      <Link to="/shop" className="buttonBack">
+        <box-icon
+          name="chevron-left"
+          type="solid"
+          flip="vertical"
+          size="lg"
+          color="rgba(69,70,70,0.81)"
+        ></box-icon>
+      </Link>
+      <img
+        className="imageProducts"
+        src={oneProduct.productImage}
+        alt={oneProduct.name}
+      />
+      <h1 className="titleMenu">{oneProduct.name}</h1>
+      <p className="description">{oneProduct.description}</p>
+      <p className="priceCard">{oneProduct.price}€</p>
       <input
         className="quantity"
         name="quantity"

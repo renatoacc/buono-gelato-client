@@ -6,9 +6,11 @@ import { AuthContext } from "../../context/AuthProvider";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
+  const [userData, setUserData] = useState(null);
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
   const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
+  let isFavorite = false;
 
   async function getUser() {
     const { data } = await axios.get(API_BASE_URL + "/logged");
@@ -16,6 +18,15 @@ export default function Shop() {
       addUserToContext(data);
     } else {
       navigate("/login");
+    }
+  }
+
+  async function userDataAxios() {
+    try {
+      const { data } = await axios.get(API_BASE_URL + "/userInfo/" + user._id);
+      setUserData(data);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -40,6 +51,7 @@ export default function Shop() {
       getUser();
     } else {
       listProducts();
+      userDataAxios();
     }
   }, [user]);
 
@@ -61,12 +73,29 @@ export default function Shop() {
   }, [filter]);
 
   if (products === null) {
-    return <box-icon name="loader-alt"></box-icon>;
+    return (
+      <box-icon
+        name="loader-alt"
+        animation="spin"
+        flip="horizontal"
+        color="#133b60"
+      ></box-icon>
+    );
+  }
+  if (userData === null) {
+    return (
+      <box-icon
+        name="loader-alt"
+        animation="spin"
+        flip="horizontal"
+        color="#133b60"
+      ></box-icon>
+    );
   }
 
   return (
     <div className="backPage">
-      <h1>Menu</h1>
+      <h1 className="titleMenu">Menu</h1>
       {products.length === 0 ? (
         <h1> Sorry, we don't have this product </h1>
       ) : (
@@ -76,9 +105,14 @@ export default function Shop() {
             return elem.name.toLocaleLowerCase().trim().includes(search.trim());
           })
           .map((elem) => {
+            const productId = elem._id;
             return (
-              <div key={elem._id}>
-                <img src={elem.productImage} alt={elem.name} />
+              <div key={elem._id} className="foodCard">
+                <img
+                  className="imageProducts"
+                  src={elem.productImage}
+                  alt={elem.name}
+                />
                 <Link to={"/product/" + elem._id} className="link">
                   <h1>{elem.name}</h1>
                 </Link>
@@ -87,10 +121,26 @@ export default function Shop() {
                     handleAddFavorit(event, elem);
                   }}
                 >
-                  <box-icon name="heart"></box-icon>
+                  {userData.favourites.map((elem2) => {
+                    if (elem2._id !== productId) {
+                      return (isFavorite = true);
+                    }
+                    return (isFavorite = false);
+                  })}
+                  {isFavorite ? (
+                    <box-icon
+                      name="heart"
+                      type="solid"
+                      color="#133b60"
+                    ></box-icon>
+                  ) : (
+                    <box-icon name="heart" color="#133b60"></box-icon>
+                  )}
                 </button>
-                <p>{elem.description}</p>
-                <p>{elem.price}€</p>
+                <p className="description">{elem.description}</p>
+                <p className="priceCard">
+                  <b>{elem.price}€</b>
+                </p>
               </div>
             );
           })

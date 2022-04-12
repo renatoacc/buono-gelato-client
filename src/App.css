@@ -150,7 +150,7 @@ h1{
   flex-direction: column;
   align-items: center;
   row-gap: 0.24rem;
-  color: var(--title-color);
+  color: #133b60;
   font-weight: 400;
 }
 
@@ -189,7 +189,7 @@ h1{
   display: inline-block;
   font-size: 0.938rem;
   cursor: pointer;
-  margin: 5px;
+  margin: 15px;
   font-family: Raleway;
 }
 .link{
@@ -260,14 +260,76 @@ h1{
   display: flex;
   font-family: Raleway;
   width: 97.5vw;
-  height: 3vh;
+  padding: 5px;
   margin: 5px;
   border-radius: 15vw;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
   color:#133b60;
   box-shadow: 2px 1px 2px 1px #46464610;
+}
+
+/* food card */
+
+.foodCard{
+  display: flex;
+  width: 100vw;
+  height: 65vh;
+  font-family: Raleway;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5vh;
+  border-radius: 0 0 25px 25px;
+  filter: drop-shadow(0 0.5rem 0.2rem rgb(223, 223, 223));
+}
+
+.imageProducts{
+  position: relative;
+  z-index: -1;
+  margin-top: 0;
+  width: 100vw;
+  height: 40vh;
+}
+
+.titleMenu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  padding-top: 10px;
+  font-family: Raleway;
+}
+.description{
+  display: flex;
+  width: 90vw;
+  height: 10vh;
+  margin-top: 0;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  font-family: Raleway;
+}
+
+.priceCard{
+  display: flex;
+  width: 100vw;
+  height: 5vh;
+  margin-top: 0;
+  font-size: 25px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  font-family: Raleway;
+}
+
+.buttonBack{
+  display: flex;
+  justify-content: flex-start;
+  position:absolute;
+  z-index: 50;
 }
 
 .backPage{
@@ -278,3 +340,5 @@ h1{
   width: 100%;
   height: 10%;
 }
+
+/* filter: drop-shadow(0 0.5rem 0.2rem rgb(223, 223, 223)); */
