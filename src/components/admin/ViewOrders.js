@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/AuthProvider";
 export default function ShowOrders() {
     const [orders, setOrders] = useState([]);
  
+
     const navigate = useNavigate();
     const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
     // const params = useParams();
@@ -29,6 +30,22 @@ export default function ShowOrders() {
  
   }
 
+  
+const handlecheckOrder = (e, elem_id) =>{
+  e.preventDefault()
+  try {  
+  async function checkOrder(){ 
+  await axios.put(API_BASE_URL + "/vieworders/" + elem_id)
+  }
+  checkOrder();
+  const filteredOrders = orders.filter((elem)=> {return elem._id != elem_id})
+  setOrders(filteredOrders)
+  navigate("/vieworders");
+  
+  } catch (error) {
+    console.error("Error in updating the checkout on the server!", error);
+  }
+};
 
     useEffect(() => {
       if (!user) {
@@ -41,7 +58,6 @@ export default function ShowOrders() {
     // const handleSearch = (event) => {
     //     setFilter(event.target.value);
    
-   
 
       return (
         <div>
@@ -51,15 +67,15 @@ export default function ShowOrders() {
           ) : (
             orders
               .map((elem) => {
-                if(elem.checkout === false)
+               if(elem.checkout === false)
                 return ( 
-                  <div key={elem._id}>
-                    <h1>{elem.clientName}</h1>
+                  <div key={elem._id}  >
+                    <h1>{elem.clientName} </h1>
                    {elem.products.map((productElement)=>{
                      return(<p key={productElement._id}>{productElement.name} x {productElement.quantity}</p>) 
                    })}
                     <p>{elem.checkout}</p>
-                    <button className="buttonsBuono" onClick={()=>elem.checkout = true}>checkout</button>
+                    <button className="buttonsBuono" onClick={(e)=>{handlecheckOrder(e,elem._id)}}>checkout</button>
                   </div> 
                 );
                 

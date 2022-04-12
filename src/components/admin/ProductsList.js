@@ -81,6 +81,7 @@ const handleDeleteProduct = (e, elem_id) =>{
               <div key={elem._id}>
               
                 <h1>{elem.name}</h1>
+                <img src={elem.productImage} alt ={elem.name}></img>
                 <p>{elem.description}</p>
                 <p>{elem.price}€</p>
 
