@@ -8,7 +8,7 @@ export default function Product() {
   const params = useParams();
   const [dataUser, setDataUser] = useState({});
   const [oneProduct, setOneProduct] = useState({});
-  const [quantity, setQuantity] = useState({ quantity: "" });
+  const [quantity, setQuantity] = useState({ quantity: "1" });
   const navigate = useNavigate();
   const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
 
