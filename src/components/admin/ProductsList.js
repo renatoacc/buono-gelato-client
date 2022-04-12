@@ -8,22 +8,26 @@ export default function ShowProducts() {
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
-  const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
-  const params = useParams();
-  //   async function getUser() {
-  //     const { data } = await axios.get(API_BASE_URL + "/logged");
-  //     if (data) {
-  //       addUserToContext(data);
-  //     } else {
-  //       navigate("/login");
-  //     }
-  //   }
 
-  //   useEffect(() => {
-  //     if (!user) {
-  //       getUser();
-  //     }
-  //   }, []);
+  const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
+ 
+  
+  
+  async function checkAdmin() {
+    const { data } = await axios.get(API_BASE_URL + "/admin");
+    if (data) {
+      addAdminToContext(data);
+    } else {
+      navigate("/login");
+    }
+  }
+
+  useEffect(() => {
+    if (!admin) {
+      checkAdmin();
+    }
+  }, []);
+
 
   const handleDeleteProduct = (e, elem_id) => {
     e.preventDefault();
