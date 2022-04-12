@@ -8,6 +8,7 @@ export default function ShowProducts() {
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
+
   const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
  
   
@@ -28,22 +29,22 @@ export default function ShowProducts() {
   }, []);
 
 
-const handleDeleteProduct = (e, elem_id) =>{
-        e.preventDefault()
-        try {  
-        async function deleteProduct(){ 
-        await axios.post(API_BASE_URL + "/products/delete/" + elem_id)
-        }
-        deleteProduct();
-        const filteredProducts = products.filter((elem)=> {return elem._id != elem_id})
-        setProducts(filteredProducts)
-        navigate("/showproducts");
-        
-        } catch (error) {
-          console.error("Error in updating the todo on the server!", error);
-        }
-      };
-     
+  const handleDeleteProduct = (e, elem_id) => {
+    e.preventDefault();
+    try {
+      async function deleteProduct() {
+        await axios.post(API_BASE_URL + "/products/delete/" + elem_id);
+      }
+      deleteProduct();
+      const filteredProducts = products.filter((elem) => {
+        return elem._id != elem_id;
+      });
+      setProducts(filteredProducts);
+      navigate("/showproducts");
+    } catch (error) {
+      console.error("Error in updating the todo on the server!", error);
+    }
+  };
 
   const handleSearch = (event) => {
     setFilter(event.target.value);
@@ -66,10 +67,10 @@ const handleDeleteProduct = (e, elem_id) =>{
     <div>
       <h1>Products</h1>
       <Link to={"/products"} className="link">
-                <button className="buttonsBuono" type="submit">
-                 Create New Product
-                </button>
-                </Link>
+        <button className="buttonsBuono" type="submit">
+          Create New Product
+        </button>
+      </Link>
       {products.length === 0 ? (
         <h1> Sorry, we don't have this product </h1>
       ) : (
@@ -81,19 +82,23 @@ const handleDeleteProduct = (e, elem_id) =>{
           .map((elem) => {
             return (
               <div key={elem._id}>
-              
                 <h1>{elem.name}</h1>
-                <img src={elem.productImage} alt ={elem.name}></img>
+                <img src={elem.productImage} alt={elem.name}></img>
                 <p>{elem.description}</p>
                 <p>{elem.price}€</p>
 
                 <Link to={"/products/" + elem._id} className="link">
-                <button className="buttonsBuono" type="submit">
-                 Edit
-                </button>
+                  <button className="buttonsBuono" type="submit">
+                    Edit
+                  </button>
                 </Link>
-                <button className="buttonsBuono" onClick={(e)=>{handleDeleteProduct(e,elem._id)}}>
-                 Delete
+                <button
+                  className="buttonsBuono"
+                  onClick={(e) => {
+                    handleDeleteProduct(e, elem._id);
+                  }}
+                >
+                  Delete
                 </button>
                 {/* </Link> */}
               </div>
@@ -101,11 +106,13 @@ const handleDeleteProduct = (e, elem_id) =>{
           })
       )}
       <input
+        className="quantity"
         value={filter}
         type="text"
         placeholder="Search"
         onChange={handleSearch}
       />
+      <div className="endPage" />
     </div>
   );
 }

@@ -65,7 +65,7 @@ export default function Shop() {
   }
 
   return (
-    <div>
+    <div className="backPage">
       <h1>Menu</h1>
       {products.length === 0 ? (
         <h1> Sorry, we don't have this product </h1>
@@ -78,6 +78,7 @@ export default function Shop() {
           .map((elem) => {
             return (
               <div key={elem._id}>
+                <img src={elem.productImage} alt={elem.name} />
                 <Link to={"/product/" + elem._id} className="link">
                   <h1>{elem.name}</h1>
                 </Link>
@@ -95,11 +96,13 @@ export default function Shop() {
           })
       )}
       <input
+        className="quantity"
         value={filter}
         type="text"
         placeholder="Search"
         onChange={handleSearch}
       />
+      <div className="endPage" />
     </div>
   );
 }

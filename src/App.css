@@ -172,7 +172,6 @@ h1{
   display: flex;
   width: 100vw;
   height: 90vh;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   font-family: Raleway;
@@ -252,7 +251,7 @@ h1{
 .singleProduct{
   display: flex;
   font-family: Raleway;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 }
@@ -260,7 +259,7 @@ h1{
 .quantity{
   display: flex;
   font-family: Raleway;
-  width: 80vw;
+  width: 97.5vw;
   height: 3vh;
   margin: 5px;
   border-radius: 15vw;
@@ -269,4 +268,13 @@ h1{
   border: none;
   color:#133b60;
   box-shadow: 2px 1px 2px 1px #46464610;
+}
+
+.backPage{
+  width: 100%;
+  height: 90%;
+}
+.endPage{
+  width: 100%;
+  height: 10%;
 }
