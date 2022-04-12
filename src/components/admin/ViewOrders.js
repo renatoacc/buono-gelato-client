@@ -6,8 +6,18 @@ import { AuthContext } from "../../context/AuthProvider";
 
 export default function ShowOrders() {
     const [orders, setOrders] = useState([]);
- 
 
+    const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
+ 
+  async function checkAdmin() {
+    const { data } = await axios.get(API_BASE_URL + "/admin");
+    if (data) {
+      addAdminToContext(data);
+    } else {
+      navigate("/login");
+    }
+  }
+ 
     const navigate = useNavigate();
     const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
     // const params = useParams();
@@ -48,16 +58,14 @@ const handlecheckOrder = (e, elem_id) =>{
 };
 
     useEffect(() => {
-      if (!user) {
-        getUser();
+      if (!admin) {
+        checkAdmin();
       } else{
         listOrders();
       }
-    }, [user]);
+    }, []);
     console.log(orders)
-    // const handleSearch = (event) => {
-    //     setFilter(event.target.value);
-   
+  
 
       return (
         <div>

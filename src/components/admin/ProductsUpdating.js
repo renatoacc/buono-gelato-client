@@ -1,9 +1,28 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../consts";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 export default function UpdateProduct(){
+  const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
+ 
+  async function checkAdmin() {
+    const { data } = await axios.get(API_BASE_URL + "/admin");
+    if (data) {
+      addAdminToContext(data);
+    } else {
+      navigate("/login");
+    }
+  }
+
+  useEffect(() => {
+    if (!admin) {
+      checkAdmin();
+    }
+  }, []);
+
+
     const params = useParams();
   const [product, setProduct] = useState({});
 

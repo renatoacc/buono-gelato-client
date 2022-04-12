@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
-import { getNextKeyDef } from "@testing-library/user-event/dist/keyboard/getNextKeyDef";
+
 
 
 export default function ShowIngredients() {
@@ -12,6 +12,20 @@ export default function ShowIngredients() {
   const navigate = useNavigate();
   const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
 
+  async function checkAdmin() {
+    const { data } = await axios.get(API_BASE_URL + "/admin");
+    if (data) {
+      addAdminToContext(data);
+    } else {
+      navigate("/login");
+    }
+  }
+
+  useEffect(() => {
+    if (!admin) {
+      checkAdmin();
+    }
+  }, []);
 
 
 const handleDeleteIngredients = (e, elem_id) =>{

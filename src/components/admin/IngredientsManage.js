@@ -1,10 +1,26 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../consts";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
-
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from "../../context/AuthProvider";
 
 export default function CreateIngredient(){
+  const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
+
+  async function checkAdmin() {
+    const { data } = await axios.get(API_BASE_URL + "/admin");
+    if (data) {
+      addAdminToContext(data);
+    } else {
+      navigate("/login");
+    }
+  }
+
+  useEffect(() => {
+    if (!admin) {
+      checkAdmin();
+    }
+  }, []);
     
     const [ingredient, setIngredient] = useState({});
   

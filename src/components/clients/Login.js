@@ -54,6 +54,7 @@ export default function Login() {
           value={user.password}
           onChange={handleUserState}
         />
+        <p className="text-danger" >{errorState}</p>
 
         <button className="buttonsBuono">Login</button>
         <Link className="link" to={"/signup"}>
