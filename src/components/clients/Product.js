@@ -67,9 +67,9 @@ export default function Product() {
 
   return (
     <div className="singleProduct">
+      <img src={oneProduct.productImage} alt={oneProduct.name} />
       <h1>{oneProduct.name}</h1>
       <p>{oneProduct.description}</p>
-      <img src={oneProduct.productImage} alt={oneProduct.name} />
       <p>{oneProduct.price}€</p>
       <input
         className="quantity"
