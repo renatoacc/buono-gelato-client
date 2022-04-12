@@ -53,7 +53,11 @@ export default function LayoutComponent() {
               </li>
               <li className="nav__item">
                 <Link to="./favorit" className="nav__link">
-                  <box-icon className="nav__icon" name="heart"></box-icon>
+                  <box-icon
+                    className="nav__icon"
+                    type="solid"
+                    name="heart"
+                  ></box-icon>
                   <span className="nav__name">Favorit</span>
                 </Link>
               </li>

@@ -32,7 +32,6 @@ export default function Product() {
   };
 
   const orderProduct = { ...oneProduct, quantity: quantity.quantity };
-  console.log("Product with quantity to add cart:", orderProduct);
 
   useEffect(() => {
     async function getData() {
@@ -49,7 +48,6 @@ export default function Product() {
     }
     getDataUser();
   }, [user]);
-  console.log("Cart shop from user:", dataUser);
 
   const handleAddProduct = (event) => {
     event.preventDefault();

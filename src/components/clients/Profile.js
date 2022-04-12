@@ -66,10 +66,18 @@ export default function Profile() {
         </p>
       </div>
       <div>
-        {userInfo.cart.map((elem) => {
-          return <p>{elem.name}</p>;
+        <h3>Favourites</h3>
+        {userInfo.favourites.map((elem) => {
+          return (
+            <div key={elem._id}>
+              {/* <img></img> */}
+              <h5>{elem.name}</h5>
+              <p>{elem.description}</p>
+            </div>
+          );
         })}
       </div>
+      <div></div>
     </div>
   );
 }

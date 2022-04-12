@@ -30,9 +30,17 @@ export default function ListFavorit() {
   }
 
   const handlerRemoveFav = async (event, elem_id) => {
-    console.log(elem_id);
-    await axios.put(API_BASE_URL + "/favoriteRemove/" + elem_id);
-    listFavorit();
+    const deleteResponse = await axios.put(
+      API_BASE_URL + "/favoriteRemove/" + elem_id
+    );
+    const cloneUser = JSON.parse(JSON.stringify(favorit));
+    if (deleteResponse) {
+      const newFavorite = cloneUser.favourites.filter((elem) => {
+        return elem._id !== elem_id;
+      });
+      cloneUser.favourites = newFavorite;
+      setFavorit(cloneUser);
+    }
   };
 
   useEffect(() => {
@@ -46,7 +54,7 @@ export default function ListFavorit() {
   if (favorit === null) {
     return <p>Loading</p>;
   }
-  console.log(favorit);
+
   return (
     <div>
       <h1>Favorit List</h1>
@@ -61,7 +69,7 @@ export default function ListFavorit() {
                 handlerRemoveFav(event, elem._id);
               }}
             >
-              remove
+              <box-icon type="solid" name="heart"></box-icon>
             </button>
           </div>
         );

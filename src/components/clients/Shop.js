@@ -30,8 +30,7 @@ export default function Shop() {
   const handleAddFavorit = (event, elem) => {
     event.preventDefault();
     async function addFavorit(elem) {
-      const addProduct = [user._id, elem];
-      await axios.put(API_BASE_URL + "/favoritAdd", addProduct);
+      await axios.put(API_BASE_URL + "/favoritAdd", elem);
     }
     addFavorit(elem);
   };
@@ -88,7 +87,6 @@ export default function Shop() {
                   }}
                 >
                   <box-icon name="heart"></box-icon>
-                  <span className="nav__name"></span>
                 </button>
                 <p>{elem.description}</p>
                 <p>{elem.price}€</p>
