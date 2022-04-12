@@ -61,6 +61,10 @@ export default function Shop() {
     getData();
   }, [filter]);
 
+  if (products === null) {
+    return <p>Loading</p>;
+  }
+
   return (
     <div>
       <h1>Menu</h1>

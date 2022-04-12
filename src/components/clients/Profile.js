@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthProvider";
 export default function Profile() {
   const navigate = useNavigate();
   const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState(null);
 
   async function getUser() {
     const { data } = await axios.get(API_BASE_URL + "/logged");
@@ -38,6 +38,10 @@ export default function Profile() {
     }
   }, []);
 
+  if (userInfo === null) {
+    return <p>Loading</p>;
+  }
+
   return (
     <div>
       <div>
@@ -62,10 +66,9 @@ export default function Profile() {
         </p>
       </div>
       <div>
-        {/* {userInfo &&
-          userInfo.cart.map((elem) => {
-            <p>{elem.name}</p>;
-          })} */}
+        {userInfo.cart.map((elem) => {
+          return <p>{elem.name}</p>;
+        })}
       </div>
     </div>
   );
