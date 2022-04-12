@@ -39,7 +39,7 @@ export default function Profile() {
   }, []);
 
   if (userInfo === null) {
-    return <p>Loading</p>;
+    return <box-icon name="loader-alt"></box-icon>;
   }
 
   return (

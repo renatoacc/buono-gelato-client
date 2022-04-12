@@ -13,7 +13,7 @@
   --first-color-alt:hsl(var(--hue), var(--sat), 36%);
   --title-color:hsl(var(--hue), 12%, 15%);
   --text-color:hsl(var(--hue), 8%, 35%);
-  --body-color:hsl(var(--hue), 100%, 99%);
+  --body-color:hsl(var(--hue), 80%, 99%);
   --container-color:#fff;
 
   /* fonts and typography */
@@ -50,7 +50,7 @@ body{
   margin: var(--header-height) 0 0 0;
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
-  background-color: var(--body-color);
+  background-color: rgba(251, 251, 251, 0.959);
   color: var(--text-color);
 }
 button{
