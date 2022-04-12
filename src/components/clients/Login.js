@@ -34,7 +34,7 @@ export default function Login() {
   return (
     <div className="formsPage">
       <img src={logo} alt="Buono Gelato" />
-      <h2>Login</h2>
+      <h1>Login</h1>
       <form onSubmit={login}>
         <input
           name="email"

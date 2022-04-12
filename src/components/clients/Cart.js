@@ -45,6 +45,20 @@ export default function Cart() {
     }
   };
 
+  const handleDelete = (e, elem_id, index) => {
+    try {
+      const userIdAndElemId = [user._id, elem_id, index];
+      async function deleteElementCart() {
+        await axios.put(API_BASE_URL + "/cartDeleteElement/", userIdAndElemId);
+        getCart();
+        console.log("Delete success!");
+      }
+      deleteElementCart();
+    } catch (error) {
+      console.error("Error delete the product!", error);
+    }
+  };
+
   console.log("Data form database, user cart:", shoppingCart);
 
   return (
@@ -54,24 +68,29 @@ export default function Cart() {
         <tr>
           <th>Quantity</th>
           <th>Product</th>
-          <th>Price/uni</th>
+          <th>Price</th>
           <th>Total</th>
+          <th></th>
         </tr>
         {shoppingCart &&
-          shoppingCart.cart.map((elem) => (
+          shoppingCart.cart.map((elem, index) => (
             <tr key={elem._id}>
               <td>{elem.quantity}</td>
               <td>{elem.name}</td>
               <td>{elem.price}€</td>
               <td>{elem.price * elem.quantity}€</td>
+              <td>
+                <button
+                  className="buttonsBuono"
+                  onClick={(e) => {
+                    handleDelete(e, elem._id, index);
+                  }}
+                >
+                  delete
+                </button>
+              </td>
             </tr>
           ))}
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
       </table>
       <button className="buttonsBuono" onClick={handleCreateOrder}>
         Order

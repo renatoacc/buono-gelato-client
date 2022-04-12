@@ -27,6 +27,14 @@ export default function Shop() {
       console.log(error.response.data);
     }
   }
+  const handleAddFavorit = (event, elem) => {
+    event.preventDefault();
+    async function addFavorit(elem) {
+      const addProduct = [user._id, elem];
+      await axios.put(API_BASE_URL + "/favoritAdd", addProduct);
+    }
+    addFavorit(elem);
+  };
 
   useEffect(() => {
     if (!user) {
@@ -70,6 +78,14 @@ export default function Shop() {
                 <Link to={"/product/" + elem._id} className="link">
                   <h1>{elem.name}</h1>
                 </Link>
+                <button
+                  onClick={(event) => {
+                    handleAddFavorit(event, elem);
+                  }}
+                >
+                  <box-icon name="heart"></box-icon>
+                  <span className="nav__name"></span>
+                </button>
                 <p>{elem.description}</p>
                 <p>{elem.price}€</p>
               </div>
