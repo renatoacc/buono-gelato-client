@@ -16,6 +16,7 @@ export default function Login() {
 
   const handleUserState = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
+    setErrorState(null);
   };
 
   const login = async (event) => {
@@ -31,9 +32,13 @@ export default function Login() {
       navigate("/profile");
       }
     } catch (err) {
-      setErrorState({ message: err.response.data.erroMessage });
+      let eMessage = err.response.data.errorMessage
+      console.log(">>>>>>>>>>>>",err.response.data.errorMessage)
+     setErrorState("Email or password don't match...");
+    
     }
   };
+  
 
   return (
     <div className="formsPage">
@@ -54,7 +59,7 @@ export default function Login() {
           value={user.password}
           onChange={handleUserState}
         />
-        <p className="text-danger" >{errorState}</p>
+         {errorState && <p className="text-danger" >{errorState}</p>}
 
         <button className="buttonsBuono">Login</button>
         <Link className="link" to={"/signup"}>

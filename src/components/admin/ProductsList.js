@@ -42,7 +42,7 @@ export default function ShowProducts() {
       setProducts(filteredProducts);
       navigate("/showproducts");
     } catch (error) {
-      console.error("Error in updating the todo on the server!", error);
+      console.error("Error deleting product on the server!", error);
     }
   };
 

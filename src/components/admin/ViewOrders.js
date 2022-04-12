@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 export default function ShowOrders() {
-    const [orders, setOrders] = useState([]);
+    const [orders, setOrders] = useState(null);
 
     const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
  
@@ -63,8 +63,11 @@ const handlecheckOrder = (e, elem_id) =>{
       } else{
         listOrders();
       }
-    }, []);
-    console.log(orders)
+    }, [admin]);
+
+    if (orders === null) {
+      return <p>Loading</p>;
+    }
   
 
       return (
