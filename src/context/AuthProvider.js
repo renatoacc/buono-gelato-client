@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 export function AuthProvider(props) {
   const [user, setUser] = useState(null);
+  const[admin, setAdmin] = useState(null);
 
   const addUserToContext = (newUser) => {
     if (user !== null) return;
@@ -15,9 +16,18 @@ export function AuthProvider(props) {
     setUser(null);
   };
 
+  const addAdminToContext =(newAdmin) =>{
+    if(admin!== null) return;
+    setAdmin(newAdmin);
+  };
+
+  const removeAdminFromContext = () => {
+    setAdmin(null);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, addUserToContext, removeUserFromContext }}
+      value={{ user, addUserToContext, removeUserFromContext, admin, addAdminToContext, removeAdminFromContext  }}
     >
       {props.children}
     </AuthContext.Provider>
