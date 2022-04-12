@@ -3,12 +3,24 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import {  toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 export default function ShowOrders() {
+
     const [orders, setOrders] = useState(null);
 
     const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
- 
+    const notify = () => toast.success("Your order is ready",{
+position: "top-center",
+autoClose: false,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+    });
+
   async function checkAdmin() {
     const { data } = await axios.get(API_BASE_URL + "/admin");
     if (data) {
@@ -70,8 +82,10 @@ const handlecheckOrder = (e, elem_id) =>{
     }
   
 
+
       return (
         <div>
+
           <h1>Orders</h1>
           {orders.length === 0 ? (
             <h1> Sorry, you don't have orders </h1>
@@ -86,7 +100,7 @@ const handlecheckOrder = (e, elem_id) =>{
                      return(<p key={productElement._id}>{productElement.name} x {productElement.quantity}</p>) 
                    })}
                     <p>{elem.checkout}</p>
-                    <button className="buttonsBuono" onClick={(e)=>{handlecheckOrder(e,elem._id)}}>checkout</button>
+                    <button className="buttonsBuono"   onClick={(e)=>{handlecheckOrder(e,elem._id, notify())}}>checkout</button>
                   </div> 
                 );
                 
