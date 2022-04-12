@@ -45,11 +45,10 @@ export default function Cart() {
     }
   };
 
-  const handleDelete = (e, elem_id, index) => {
+  const handleDelete = (e, index) => {
     try {
-      const userIdAndElemId = [user._id, elem_id, index];
       async function deleteElementCart() {
-        await axios.put(API_BASE_URL + "/cartDeleteElement/", userIdAndElemId);
+        await axios.put(API_BASE_URL + "/cartDeleteElement/", index);
         getCart();
         console.log("Delete success!");
       }
@@ -58,8 +57,6 @@ export default function Cart() {
       console.error("Error delete the product!", error);
     }
   };
-
-  console.log("Data form database, user cart:", shoppingCart);
 
   return (
     <div>
@@ -83,7 +80,7 @@ export default function Cart() {
                 <button
                   className="buttonsBuono"
                   onClick={(e) => {
-                    handleDelete(e, elem._id, index);
+                    handleDelete(e, index);
                   }}
                 >
                   delete
