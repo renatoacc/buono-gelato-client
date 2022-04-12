@@ -82,7 +82,7 @@ export default function Shop() {
                 <Link to={"/product/" + elem._id} className="link">
                   <h1>{elem.name}</h1>
                 </Link>
-                <button
+                <button 
                   onClick={(event) => {
                     handleAddFavorit(event, elem);
                   }}

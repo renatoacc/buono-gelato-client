@@ -79,7 +79,7 @@ export default function Profile() {
           );
         })}
       </div>
-      <div> <ToastContainer  /> </div>
+  
     </div>
   );
 }
