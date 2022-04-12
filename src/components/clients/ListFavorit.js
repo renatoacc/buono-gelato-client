@@ -56,12 +56,12 @@ export default function ListFavorit() {
   }
 
   return (
-    <div>
+    <div className="backPage">
       <h1>Favorit List</h1>
       {favorit.favourites.map((elem) => {
         return (
           <div key={elem._id}>
-            {/* <img></img> */}
+            <img src={elem.productImage} alt={elem.name} />
             <h1>{elem.name}</h1>
             <p>{elem.description}</p>
             <button
@@ -74,6 +74,7 @@ export default function ListFavorit() {
           </div>
         );
       })}
+      <div className="endPage" />
     </div>
   );
 }
