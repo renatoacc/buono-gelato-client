@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -77,7 +79,7 @@ export default function Profile() {
           );
         })}
       </div>
-      <div></div>
+  
     </div>
   );
 }

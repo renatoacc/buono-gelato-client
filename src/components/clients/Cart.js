@@ -70,16 +70,19 @@ export default function Cart() {
   }
 
   return (
+   
     <div>
       <h1>Cart</h1>
-      <table>
+  
+       <table>
+       {shoppingCart.cart !=0 ? 
         <tr>
           <th>Quantity</th>
           <th>Product</th>
           <th>Price</th>
           <th>Total</th>
           <th></th>
-        </tr>
+        </tr> : <h3>Your cart is empty</h3>}
         {shoppingCart.cart.map((elem, index) => (
           <tr key={elem._id + index}>
             <td>{elem.quantity}</td>
@@ -99,10 +102,11 @@ export default function Cart() {
           </tr>
         ))}
       </table>
-      <button className="buttonsBuono" onClick={handleCreateOrder}>
+      {shoppingCart.cart !=0 ? 
+       <button className="buttonsBuono" onClick={handleCreateOrder}>
         Order
-      </button>
-      <div className="endPage" />
+      </button> : null}
+       <div className="endPage" />
     </div>
   );
 }

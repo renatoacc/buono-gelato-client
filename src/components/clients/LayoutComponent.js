@@ -1,19 +1,22 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link, Outlet } from "react-router-dom";
 import Logo from "../../assets/img/logo2.png";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 
 export default function LayoutComponent() {
   const navigate = useNavigate();
   const { removeUserFromContext } = useContext(AuthContext);
 
+ 
+
   const logout = async () => {
     try {
       const response = await axios.post(API_BASE_URL + "/logout");
-      console.log(response.data);
+      //console.log(response.data);
       removeUserFromContext();
       navigate("/login");
     } catch (err) {
@@ -22,6 +25,7 @@ export default function LayoutComponent() {
     }
   };
 
+ 
   return (
     <div className="layout">
       <div className="header">
@@ -85,6 +89,7 @@ export default function LayoutComponent() {
           </div>
           <img src={Logo} alt="buono logo" className="nav__img" />
         </nav>
+        <div> <ToastContainer  /> </div>
       </div>
       <Outlet />
     </div>
