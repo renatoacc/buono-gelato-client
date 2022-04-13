@@ -60,12 +60,14 @@ export default function Product() {
         setShoppingCart((oldCart) => {
           return [...(oldCart || []), orderProduct];
         });
-        navigate("/product/" + params.id);
+        navigate("/shop")
       }
       postProductCart();
+      
     } catch (error) {
       console.error("Error Post the cart Product", error);
     }
+   
   };
 
   return (

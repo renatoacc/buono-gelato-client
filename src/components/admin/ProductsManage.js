@@ -54,7 +54,7 @@ export default function CreateProduct(){
     //   extraIngredients:product.extraIngredients,
     //   productImage:image,
     // }
-   console.log(" NEWPRODUCT" , imageFormData)
+   //console.log(" NEWPRODUCT" , imageFormData)
     try {
       await axios.post(API_BASE_URL + "/products", imageFormData, {
         withCredentials: true,

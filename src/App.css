@@ -354,9 +354,11 @@ table {
   height: 10%;
 }
 
+
 .carousel{
   position: absolute;
 }
+
 
 .profileCard{
   position: fixe;
@@ -410,6 +412,9 @@ table {
   border-radius: 60%;
   background: red;
   color: white;
+}
+.error::placeholder{
+  color: red;
 }
 
 
