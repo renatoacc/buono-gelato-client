@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
 import backArrow from "../../assets/img/PngItem_2022960.png";
+import { ShoppingCartContext } from "../../context/ShoppingCartProvider";
 
 export default function Product() {
   const params = useParams();
@@ -11,7 +12,8 @@ export default function Product() {
   const [oneProduct, setOneProduct] = useState({});
   const [quantity, setQuantity] = useState({ quantity: "1" });
   const navigate = useNavigate();
-  const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
+  const { user, addUserToContext } = useContext(AuthContext);
+  const { setShoppingCart } = useContext(ShoppingCartContext);
 
   async function getUser() {
     const { data } = await axios.get(API_BASE_URL + "/logged");
@@ -32,7 +34,7 @@ export default function Product() {
     setQuantity({ [event.target.name]: event.target.value });
   };
 
-  const orderProduct = { ...oneProduct, quantity: quantity.quantity };
+  const orderProduct = { ...oneProduct, quantity: Number(quantity.quantity) };
 
   useEffect(() => {
     async function getData() {
@@ -52,10 +54,12 @@ export default function Product() {
 
   const handleAddProduct = (event) => {
     event.preventDefault();
-    // dataUser.cart.push(orderProduct);
     try {
       async function postProductCart() {
         await axios.post(API_BASE_URL + "/addCart", orderProduct);
+        setShoppingCart((oldCart) => {
+          return [...(oldCart || []), orderProduct];
+        });
         navigate("/product/" + params.id);
       }
       postProductCart();

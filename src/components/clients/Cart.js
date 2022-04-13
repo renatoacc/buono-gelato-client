@@ -42,6 +42,7 @@ export default function Cart() {
             cart: shoppingCart,
           });
           await axios.put(API_BASE_URL + "/deleteCart/" + user._id);
+          getCart();
           navigate("/profile");
         }
         postCreateOrder();
@@ -75,16 +76,15 @@ export default function Cart() {
   }
 
   return (
-    <div>
-      <h1>Cart</h1>
+    <div className="foodCard">
+      <h1 className="titleMenu">Cart</h1>
 
       <table>
         {shoppingCart !== 0 ? (
           <tr>
             <th>Quantity</th>
             <th>Product</th>
-            <th>Price</th>
-            <th>Total</th>
+            <th colspan="2">Total</th>
             <th></th>
           </tr>
         ) : (
@@ -94,8 +94,7 @@ export default function Cart() {
           <tr key={elem._id + index}>
             <td>{elem.quantity}</td>
             <td>{elem.name}</td>
-            <td>{elem.price}€</td>
-            <td>{elem.price * elem.quantity}€</td>
+            <td colspan="2">{elem.price * elem.quantity}€</td>
             <td>
               <button
                 className="buttonsBuono"

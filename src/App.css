@@ -325,6 +325,11 @@ h1{
   font-family: Raleway;
 }
 
+table {
+  width: 100vw;
+}
+
+
 .buttonBack{
   display: flex;
   justify-content: flex-start;
