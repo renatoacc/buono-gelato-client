@@ -52,10 +52,10 @@ export default function Product() {
 
   const handleAddProduct = (event) => {
     event.preventDefault();
-    dataUser.cart.push(orderProduct);
+    // dataUser.cart.push(orderProduct);
     try {
       async function postProductCart() {
-        await axios.put(API_BASE_URL + "/addCart", dataUser);
+        await axios.post(API_BASE_URL + "/addCart", orderProduct);
         navigate("/product/" + params.id);
       }
       postProductCart();
@@ -63,8 +63,6 @@ export default function Product() {
       console.error("Error Post the cart Product", error);
     }
   };
-
-  //   }
 
   return (
     <div className="foodCard">

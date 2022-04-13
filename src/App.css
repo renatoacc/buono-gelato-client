@@ -349,6 +349,18 @@ h1{
   height: 35vh;
   align-items: flex-start;
 }
+.avatar{
+  width: 20vw;
+  margin-left: 35vw;
+}
+
+#rowNameAvatar{
+  display: flex;
+  width: 90vw;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 
 .p__FromProfile{
   margin-left: 7vw;

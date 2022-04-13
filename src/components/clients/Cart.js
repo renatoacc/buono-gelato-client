@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthProvider";
 export default function Cart() {
   const [shoppingCart, setShoppingCart] = useState(null);
   const navigate = useNavigate();
-  const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
+  const { user, addUserToContext } = useContext(AuthContext);
 
   async function getUser() {
     const { data } = await axios.get(API_BASE_URL + "/logged");
@@ -70,19 +70,21 @@ export default function Cart() {
   }
 
   return (
-   
     <div>
       <h1>Cart</h1>
-  
-       <table>
-       {shoppingCart.cart !=0 ? 
-        <tr>
-          <th>Quantity</th>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Total</th>
-          <th></th>
-        </tr> : <h3>Your cart is empty</h3>}
+
+      <table>
+        {shoppingCart.cart != 0 ? (
+          <tr>
+            <th>Quantity</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        ) : (
+          <h3>Your cart is empty</h3>
+        )}
         {shoppingCart.cart.map((elem, index) => (
           <tr key={elem._id + index}>
             <td>{elem.quantity}</td>
@@ -102,11 +104,12 @@ export default function Cart() {
           </tr>
         ))}
       </table>
-      {shoppingCart.cart !=0 ? 
-       <button className="buttonsBuono" onClick={handleCreateOrder}>
-        Order
-      </button> : null}
-       <div className="endPage" />
+      {shoppingCart.cart != 0 ? (
+        <button className="buttonsBuono" onClick={handleCreateOrder}>
+          Order
+        </button>
+      ) : null}
+      <div className="endPage" />
     </div>
   );
 }
