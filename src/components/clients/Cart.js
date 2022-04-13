@@ -3,9 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
+import { ShoppingCartContext} from "../../context/ShoppingCartProvider";
 
 export default function Cart() {
-  const [shoppingCart, setShoppingCart] = useState(null);
+  const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
   const navigate = useNavigate();
   const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
 
@@ -20,7 +21,8 @@ export default function Cart() {
 
   async function getCart() {
     const { data } = await axios.get(API_BASE_URL + "/cart" + user._id);
-    setShoppingCart(data);
+    console.log(data);
+    setShoppingCart(data.cart);
   }
 
   useEffect(() => {
@@ -33,9 +35,9 @@ export default function Cart() {
 
   const handleCreateOrder = (event) => {
     try {
-      if (shoppingCart.cart.length > 0) {
+      if (shoppingCart.length > 0) {
         async function postCreateOrder() {
-          await axios.post(API_BASE_URL + "/order", shoppingCart);
+          await axios.post(API_BASE_URL + "/order", {...user, cart:shoppingCart});
           await axios.put(API_BASE_URL + "/deleteCart/" + user._id);
           navigate("/profile");
         }
@@ -75,7 +77,7 @@ export default function Cart() {
       <h1>Cart</h1>
   
        <table>
-       {shoppingCart.cart !=0 ? 
+       {shoppingCart !=0 ? 
         <tr>
           <th>Quantity</th>
           <th>Product</th>
@@ -83,7 +85,10 @@ export default function Cart() {
           <th>Total</th>
           <th></th>
         </tr> : <h3>Your cart is empty</h3>}
-        {shoppingCart.cart.map((elem, index) => (
+
+        {shoppingCart.map((elem, index) => (
+
+
           <tr key={elem._id + index}>
             <td>{elem.quantity}</td>
             <td>{elem.name}</td>
@@ -102,7 +107,7 @@ export default function Cart() {
           </tr>
         ))}
       </table>
-      {shoppingCart.cart !=0 ? 
+      {shoppingCart !=0 ? 
        <button className="buttonsBuono" onClick={handleCreateOrder}>
         Order
       </button> : null}
