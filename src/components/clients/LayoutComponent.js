@@ -6,14 +6,17 @@ import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
 import { useContext, useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
-import { ShoppingCartContext} from "../../context/ShoppingCartProvider";
+import { ShoppingCartContext } from "../../context/ShoppingCartProvider";
+
+
 
 export default function LayoutComponent() {
   const navigate = useNavigate();
   const { shoppingCart } = useContext(ShoppingCartContext);
+
   const { user, addUserToContext,removeUserFromContext  } = useContext(AuthContext);
- console.log(shoppingCart);
- 
+
+
   async function getUser() {
     const { data } = await axios.get(API_BASE_URL + "/logged");
     if (data) {
@@ -24,11 +27,16 @@ export default function LayoutComponent() {
   }
 
 
+
+
+
   //console.log(numberOfItemsInCart)
   useEffect(() => {
     if (!user) {
       getUser();
-    } 
+
+    }
+
   }, [user]);
 
   const logout = async () => {
@@ -42,7 +50,6 @@ export default function LayoutComponent() {
       alert("there was an error logging out");
     }
   };
-
 
   return (
     <div className="layout">
@@ -74,7 +81,15 @@ export default function LayoutComponent() {
               </li>
               <li className="nav__item">
                 <Link to="./cart" className="nav__link">
-                {shoppingCart && shoppingCart.length > 0 ?<span className="badge">{shoppingCart.length}</span> : null }
+
+                  {shoppingCart && shoppingCart.length > 0 ? (
+                    <span className="badge">
+                      {shoppingCart.reduce((acc, value) => {
+                        return acc + value.quantity;
+                      }, 0)}
+                    </span>
+                  ) : null}
+
                   <box-icon
                     className="nav__icon"
                     color="#133b60"
@@ -108,7 +123,10 @@ export default function LayoutComponent() {
           </div>
           <img src={Logo} alt="buono logo" className="nav__img" />
         </nav>
-        <div> <ToastContainer  /> </div>
+        <div>
+          {" "}
+          <ToastContainer />{" "}
+        </div>
       </div>
       <Outlet />
     </div>

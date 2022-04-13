@@ -98,15 +98,20 @@ export default function Shop() {
           .map((elem) => {
             return (
               <div key={elem._id} className="foodCard">
-                <img
-                  className="imageProducts"
-                  src={elem.productImage}
-                  alt={elem.name}
-                />
+                <Link to={"/product/" + elem._id}>
+                  <img
+                    className="imageProducts"
+                    src={elem.productImage}
+                    alt={elem.name}
+                  />
+                </Link>
                 <Link to={"/product/" + elem._id} className="link">
                   <h1>{elem.name}</h1>
                 </Link>
-                <button 
+                <p className="priceCard">
+                  <b>{elem.price}€</b>
+                </p>
+                <button
                   onClick={(event) => {
                     handleAddFavorit(event, elem);
                   }}
@@ -128,10 +133,6 @@ export default function Shop() {
                     <box-icon name="heart" color="#133b60"></box-icon>
                   )}
                 </button>
-                <p className="description">{elem.description}</p>
-                <p className="priceCard">
-                  <b>{elem.price}€</b>
-                </p>
               </div>
             );
           })

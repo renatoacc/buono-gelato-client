@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
-import { ToastContainer } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import avatar from "../../assets/img/avatar.png";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -54,18 +55,25 @@ export default function Profile() {
   return (
     <div>
       <div className="foodCard" id="profile">
-        <h3 className="p__FromProfile">
-          Welcome {userInfo.firstName + " " + userInfo.lastName}
-        </h3>
-        <p className="p__FromProfile">
-          <b>City: </b>
-          {userInfo.city}
-        </p>
+        <div id="rowNameAvatar">
+          <h3 className="p__FromProfile">
+            Welcome,
+            <br />
+            {userInfo.firstName + " " + userInfo.lastName}!
+          </h3>
+          <img src={avatar} alt="avatar" className="avatar" />
+        </div>
+        <div>
+          <p className="p__FromProfile">
+            <b>City: </b>
+            {userInfo.city}
+          </p>
 
-        <p className="p__FromProfile">
-          <b>Email: </b>
-          {userInfo.email}
-        </p>
+          <p className="p__FromProfile">
+            <b>Email: </b>
+            {userInfo.email}
+          </p>
+        </div>
       </div>
       <div>
         <h3>Favourites</h3>
@@ -79,7 +87,6 @@ export default function Profile() {
           );
         })}
       </div>
-  
     </div>
   );
 }

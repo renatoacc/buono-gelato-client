@@ -3,12 +3,14 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
+
 import { ShoppingCartContext} from "../../context/ShoppingCartProvider";
+
 
 export default function Cart() {
   const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
   const navigate = useNavigate();
-  const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
+  const { user, addUserToContext } = useContext(AuthContext);
 
   async function getUser() {
     const { data } = await axios.get(API_BASE_URL + "/logged");
@@ -37,8 +39,16 @@ export default function Cart() {
     try {
       if (shoppingCart.length > 0) {
         async function postCreateOrder() {
-          await axios.post(API_BASE_URL + "/order", {...user, cart:shoppingCart});
+
+          await axios.post(API_BASE_URL + "/order", {
+            ...user,
+            cart: shoppingCart,
+          });
+
+
+
           await axios.put(API_BASE_URL + "/deleteCart/" + user._id);
+          getCart();
           navigate("/profile");
         }
         postCreateOrder();
@@ -72,28 +82,27 @@ export default function Cart() {
   }
 
   return (
-   
-    <div>
-      <h1>Cart</h1>
-  
-       <table>
-       {shoppingCart !=0 ? 
-        <tr>
-          <th>Quantity</th>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Total</th>
-          <th></th>
-        </tr> : <h3>Your cart is empty</h3>}
 
+    <div className="foodCard">
+      <h1 className="titleMenu">Cart</h1>
+
+      <table>
+        {shoppingCart !== 0 ? (
+          <tr>
+            <th>Quantity</th>
+            <th>Product</th>
+            <th colspan="2">Total</th>
+            <th></th>
+          </tr>
+        ) : (
+          <h3>Your cart is empty</h3>
+        )}
         {shoppingCart.map((elem, index) => (
-
 
           <tr key={elem._id + index}>
             <td>{elem.quantity}</td>
             <td>{elem.name}</td>
-            <td>{elem.price}€</td>
-            <td>{elem.price * elem.quantity}€</td>
+            <td colspan="2">{elem.price * elem.quantity}€</td>
             <td>
               <button
                 className="buttonsBuono"
@@ -107,11 +116,13 @@ export default function Cart() {
           </tr>
         ))}
       </table>
+
       {shoppingCart !=0 ? 
        <button className="buttonsBuono" onClick={handleCreateOrder}>
         Order
       </button> : null}
        <div className="endPage" />
+
     </div>
   );
 }
