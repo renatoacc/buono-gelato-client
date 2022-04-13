@@ -367,4 +367,20 @@ h1{
   margin-bottom: 2vh;
 }
 
+.nav__link{
+  padding: 15px 26px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+.nav__link .badge {
+  position: absolute;
+  top: -5px;
+  right: 3px;
+  padding: 5px 10px;
+  border-radius: 60%;
+  background: red;
+  color: white;
+}
+
 /* filter: drop-shadow(0 0.5rem 0.2rem rgb(223, 223, 223)); */
