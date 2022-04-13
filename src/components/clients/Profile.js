@@ -53,24 +53,17 @@ export default function Profile() {
 
   return (
     <div>
-      <div>
-        <h3>Name: {userInfo.firstName + " " + userInfo.lastName}</h3>
-        <p>
-          <b>Address: </b>
-          {userInfo.address}
-        </p>
-        <p>
+      <div className="foodCard" id="profile">
+        <h3 className="p__FromProfile">
+          Welcome {userInfo.firstName + " " + userInfo.lastName}
+        </h3>
+        <p className="p__FromProfile">
           <b>City: </b>
-          {userInfo.city} <b>PostCode: </b>
-          {userInfo.postcode}
+          {userInfo.city}
         </p>
-        <p>
-          <b>Vat: </b>
-          {userInfo.vat}
-        </p>
-        <p>
-          <b>Phone: </b>
-          {userInfo.phone} <b>Email: </b>
+
+        <p className="p__FromProfile">
+          <b>Email: </b>
           {userInfo.email}
         </p>
       </div>

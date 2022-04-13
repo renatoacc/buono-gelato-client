@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
+import backArrow from "../../assets/img/PngItem_2022960.png";
 
 export default function Product() {
   const params = useParams();
@@ -68,13 +69,7 @@ export default function Product() {
   return (
     <div className="foodCard">
       <Link to="/shop" className="buttonBack">
-        <box-icon
-          name="chevron-left"
-          type="solid"
-          flip="vertical"
-          size="lg"
-          color="rgba(69,70,70,0.81)"
-        ></box-icon>
+        <img src={backArrow} alt="back" />
       </Link>
       <img
         className="imageProducts"
