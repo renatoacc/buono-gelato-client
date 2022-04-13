@@ -26,10 +26,6 @@ export default function LayoutComponent() {
     }
   }
 
-
-
-
-
   //console.log(numberOfItemsInCart)
   useEffect(() => {
     if (!user) {

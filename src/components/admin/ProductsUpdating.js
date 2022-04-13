@@ -41,11 +41,21 @@ export default function UpdateProduct(){
   }, [params]);
   
   const handleSubmitProduct = async (event) => {
+   
     event.preventDefault();
-    const  afterUpdateProduct = { ...product,[event.target.name]: event.target.value  };
-    console.log(afterUpdateProduct)
+    let image = event.target.productImage.files[0];
+    // console.log(image)
+    let imageFormData = new FormData();
+    imageFormData.append("productImage", image);
+    imageFormData.append("name", product.name);
+    imageFormData.append("typeProduct", product.typeProduct);
+    imageFormData.append("description", product.description,);
+    imageFormData.append("price", product.price,);
+
     try {
-    await axios.put(API_BASE_URL + "/products/" + params.id, afterUpdateProduct);
+    await axios.put(API_BASE_URL + "/products/" + params.id, imageFormData, {
+      withCredentials: true,
+    });
       navigate("/showproducts");
     } catch (erro) {
       setError({ message: error.response.data.errorMessage });
@@ -64,13 +74,12 @@ export default function UpdateProduct(){
         placeholder="Product Name"
         onChange={handleUpdateProduct}
       />
-      <input
-        name="typeProduct"
-        type="text"
-        value={product.typeProduct}
-        placeholder="Type of the product"
-        onChange={handleUpdateProduct}
-      />
+      <select name="typeProduct" id="typeProduct">
+        <option value={product.typeProduct = "Crepe"}>Crepe</option>
+        <option value={product.typeProduct = "Waffle"}>Waffle</option>
+        <option value={product.typeProduct = "Bubble Waffle"}>Bubble Waffle</option>
+        </select>
+
       <input
         name="description"
         type="text"
@@ -85,8 +94,7 @@ export default function UpdateProduct(){
         placeholder="Price"
         onChange={handleUpdateProduct}
       />
-   
-   
+      <input type="file" name="productImage" />
       <button className="buttonsBuono" type="submit">
         Update
       </button>
