@@ -6,12 +6,30 @@ import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
 import { useContext, useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
+import { ShoppingCartContext} from "../../context/ShoppingCartProvider";
 
 export default function LayoutComponent() {
   const navigate = useNavigate();
-  const { removeUserFromContext } = useContext(AuthContext);
-
+  const { shoppingCart } = useContext(ShoppingCartContext);
+  const { user, addUserToContext,removeUserFromContext  } = useContext(AuthContext);
+ console.log(shoppingCart);
  
+  async function getUser() {
+    const { data } = await axios.get(API_BASE_URL + "/logged");
+    if (data) {
+      addUserToContext(data);
+    } else {
+      navigate("/login");
+    }
+  }
+
+
+  //console.log(numberOfItemsInCart)
+  useEffect(() => {
+    if (!user) {
+      getUser();
+    } 
+  }, [user]);
 
   const logout = async () => {
     try {
@@ -25,7 +43,7 @@ export default function LayoutComponent() {
     }
   };
 
- 
+
   return (
     <div className="layout">
       <div className="header">
@@ -56,6 +74,7 @@ export default function LayoutComponent() {
               </li>
               <li className="nav__item">
                 <Link to="./cart" className="nav__link">
+                {shoppingCart && shoppingCart.length > 0 ?<span className="badge">{shoppingCart.length}</span> : null }
                   <box-icon
                     className="nav__icon"
                     color="#133b60"
