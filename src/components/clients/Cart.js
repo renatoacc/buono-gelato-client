@@ -3,7 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
-import { ShoppingCartContext } from "../../context/ShoppingCartProvider";
+
+import { ShoppingCartContext} from "../../context/ShoppingCartProvider";
+
 
 export default function Cart() {
   const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
@@ -37,10 +39,14 @@ export default function Cart() {
     try {
       if (shoppingCart.length > 0) {
         async function postCreateOrder() {
+
           await axios.post(API_BASE_URL + "/order", {
             ...user,
             cart: shoppingCart,
           });
+
+
+
           await axios.put(API_BASE_URL + "/deleteCart/" + user._id);
           getCart();
           navigate("/profile");
@@ -76,6 +82,7 @@ export default function Cart() {
   }
 
   return (
+
     <div className="foodCard">
       <h1 className="titleMenu">Cart</h1>
 
@@ -91,6 +98,7 @@ export default function Cart() {
           <h3>Your cart is empty</h3>
         )}
         {shoppingCart.map((elem, index) => (
+
           <tr key={elem._id + index}>
             <td>{elem.quantity}</td>
             <td>{elem.name}</td>
@@ -108,11 +116,13 @@ export default function Cart() {
           </tr>
         ))}
       </table>
-      {shoppingCart !== 0 ? (
-        <button className="buttonsBuono" onClick={handleCreateOrder}>
-          Order
-        </button>
-      ) : null}
+
+      {shoppingCart !=0 ? 
+       <button className="buttonsBuono" onClick={handleCreateOrder}>
+        Order
+      </button> : null}
+       <div className="endPage" />
+
     </div>
   );
 }

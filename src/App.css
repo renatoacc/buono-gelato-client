@@ -349,6 +349,21 @@ table {
   height: 10%;
 }
 
+.nav__link{
+  padding: 15px 26px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+.nav__link .badge {
+  position: absolute;
+  top: -5px;
+  right: 3px;
+  padding: 5px 10px;
+  border-radius: 60%;
+  background: red;
+  color: white;
+
 #profile{
   display: flex;
   height: 35vh;
@@ -370,6 +385,7 @@ table {
 .p__FromProfile{
   margin-left: 7vw;
   margin-bottom: 2vh;
+
 }
 
 .nav__link{
