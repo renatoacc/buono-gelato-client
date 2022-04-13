@@ -49,7 +49,7 @@ export default function Cart() {
   const handleDelete = (e, index) => {
     try {
       async function deleteElementCart() {
-        await axios.put(API_BASE_URL + "/cartDeleteElement/", index);
+        await axios.put(API_BASE_URL + "/cartDeleteElement/", { index });
         getCart();
       }
       deleteElementCart();
@@ -84,7 +84,7 @@ export default function Cart() {
           <th></th>
         </tr> : <h3>Your cart is empty</h3>}
         {shoppingCart.cart.map((elem, index) => (
-          <tr key={elem._id}>
+          <tr key={elem._id + index}>
             <td>{elem.quantity}</td>
             <td>{elem.name}</td>
             <td>{elem.price}€</td>
@@ -106,7 +106,7 @@ export default function Cart() {
        <button className="buttonsBuono" onClick={handleCreateOrder}>
         Order
       </button> : null}
-      
+       <div className="endPage" />
     </div>
   );
 }

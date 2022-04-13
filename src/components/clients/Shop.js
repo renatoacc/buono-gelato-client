@@ -39,9 +39,10 @@ export default function Shop() {
     }
   }
   const handleAddFavorit = (event, elem) => {
-    event.preventDefault();
     async function addFavorit(elem) {
-      await axios.put(API_BASE_URL + "/favoritAdd", elem);
+      const updateUser = await axios.put(API_BASE_URL + "/favoritAdd", elem);
+      setUserData(updateUser.data);
+      listProducts();
     }
     addFavorit(elem);
   };
@@ -72,17 +73,7 @@ export default function Shop() {
     getData();
   }, [filter]);
 
-  if (products === null) {
-    return (
-      <box-icon
-        name="loader-alt"
-        animation="spin"
-        flip="horizontal"
-        color="#133b60"
-      ></box-icon>
-    );
-  }
-  if (userData === null) {
+  if (!products || !userData) {
     return (
       <box-icon
         name="loader-alt"
@@ -105,7 +96,6 @@ export default function Shop() {
             return elem.name.toLocaleLowerCase().trim().includes(search.trim());
           })
           .map((elem) => {
-            const productId = elem._id;
             return (
               <div key={elem._id} className="foodCard">
                 <img
@@ -121,13 +111,14 @@ export default function Shop() {
                     handleAddFavorit(event, elem);
                   }}
                 >
-                  {userData.favourites.map((elem2) => {
-                    if (elem2._id !== productId) {
-                      return (isFavorite = true);
-                    }
-                    return (isFavorite = false);
-                  })}
-                  {isFavorite ? (
+                  {(isFavorite = false)}
+                  {userData.favourites &&
+                    userData.favourites.forEach((element) => {
+                      if (element._id == elem._id) {
+                        isFavorite = true;
+                      }
+                    })}
+                  {userData.favourites && isFavorite ? (
                     <box-icon
                       name="heart"
                       type="solid"
