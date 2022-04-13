@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
 import { useContext, useEffect, useState } from "react";
@@ -61,13 +61,14 @@ export default function ListFavorit() {
       {favorit.favourites.map((elem) => {
         return (
           <div key={elem._id} className="foodCard">
-            <img
-              className="imageProducts"
-              src={elem.productImage}
-              alt={elem.name}
-            />
+            <Link to={"/product/" + elem._id}>
+              <img
+                className="imageProducts"
+                src={elem.productImage}
+                alt={elem.name}
+              />
+            </Link>
             <h1>{elem.name}</h1>
-            <p className="description">{elem.description}</p>
             <button
               onClick={(event) => {
                 handlerRemoveFav(event, elem._id);

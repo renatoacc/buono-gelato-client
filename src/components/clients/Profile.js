@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
 import avatar from "../../assets/img/avatar.png";
-
 import "react-toastify/dist/ReactToastify.css";
+import Carousel from "./Carousel";
+import "swiper/css/bundle";
 
 export default function Profile() {
   const navigate = useNavigate();
-  const { user, addUserToContext } = useContext(AuthContext); // logout , removeUserFromContext
+  const { user, addUserToContext } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState(null);
+  const [products, setProducts] = useState(null);
 
   async function getUser() {
     const { data } = await axios.get(API_BASE_URL + "/logged");
@@ -20,12 +22,21 @@ export default function Profile() {
       navigate("/login");
     }
   }
+  async function listProducts() {
+    try {
+      const { data } = await axios.get(API_BASE_URL + "/shop");
+      setProducts(data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
 
   useEffect(() => {
     if (!user) {
       getUser();
     }
-  }, []);
+    listProducts();
+  }, [user]);
 
   useEffect(() => {
     try {
@@ -41,7 +52,7 @@ export default function Profile() {
     }
   }, []);
 
-  if (userInfo === null) {
+  if (userInfo === null || products === null) {
     return (
       <box-icon
         name="loader-alt"
@@ -54,7 +65,7 @@ export default function Profile() {
 
   return (
     <div>
-      <div className="foodCard" id="profile">
+      <div className="profileCard">
         <div id="rowNameAvatar">
           <h3 className="p__FromProfile">
             Welcome,
@@ -75,17 +86,8 @@ export default function Profile() {
           </p>
         </div>
       </div>
-      <div>
-        <h3>Favourites</h3>
-        {userInfo.favourites.map((elem) => {
-          return (
-            <div key={elem._id}>
-              {/* <img></img> */}
-              <h5>{elem.name}</h5>
-              <p>{elem.description}</p>
-            </div>
-          );
-        })}
+      <div className="carousel">
+        <Carousel />
       </div>
     </div>
   );
