@@ -75,11 +75,13 @@ export default function Product() {
       <Link to="/shop" className="buttonBack">
         <img src={backArrow} alt="back" />
       </Link>
-      <img
-        className="imageProducts"
-        src={oneProduct.productImage}
-        alt={oneProduct.name}
-      />
+      <Link to="/shop">
+        <img
+          className="imageProducts"
+          src={oneProduct.productImage}
+          alt={oneProduct.name}
+        />
+      </Link>
       <h1 className="titleMenu">{oneProduct.name}</h1>
       <p className="description">{oneProduct.description}</p>
       <p className="priceCard">{oneProduct.price}€</p>

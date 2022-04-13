@@ -8,14 +8,12 @@ import { useContext, useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { ShoppingCartContext } from "../../context/ShoppingCartProvider";
 
-
-
 export default function LayoutComponent() {
   const navigate = useNavigate();
   const { shoppingCart } = useContext(ShoppingCartContext);
 
-  const { user, addUserToContext,removeUserFromContext  } = useContext(AuthContext);
-
+  const { user, addUserToContext, removeUserFromContext } =
+    useContext(AuthContext);
 
   async function getUser() {
     const { data } = await axios.get(API_BASE_URL + "/logged");
@@ -30,9 +28,7 @@ export default function LayoutComponent() {
   useEffect(() => {
     if (!user) {
       getUser();
-
     }
-
   }, [user]);
 
   const logout = async () => {
@@ -77,7 +73,6 @@ export default function LayoutComponent() {
               </li>
               <li className="nav__item">
                 <Link to="./cart" className="nav__link">
-
                   {shoppingCart && shoppingCart.length > 0 ? (
                     <span className="badge">
                       {shoppingCart.reduce((acc, value) => {
@@ -106,7 +101,7 @@ export default function LayoutComponent() {
                 </Link>
               </li>
               <li className="nav__item">
-                <button className="nav__link" onClick={logout}>
+                <button className="nav__link" id="logout" onClick={logout}>
                   <box-icon
                     className="nav__icon"
                     color="#133b60"

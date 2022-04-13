@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
@@ -83,7 +83,7 @@ export default function Cart() {
 
       <table>
         {shoppingCart != 0 ? (
-          <tr>
+         <tr className="tableTitles">
             <th>Quantity</th>
             <th>Product</th>
             <th colspan="2">Total</th>
