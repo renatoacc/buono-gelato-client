@@ -4,16 +4,14 @@ import { Link, Outlet } from "react-router-dom";
 import Logo from "../../assets/img/logo2.png";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
 export default function LayoutComponent() {
-const params = useParams();
   const navigate = useNavigate();
   const { removeUserFromContext } = useContext(AuthContext);
 
-
-
+ 
 
   const logout = async () => {
     try {
@@ -27,8 +25,8 @@ const params = useParams();
     }
   };
 
+ 
   return (
-    
     <div className="layout">
       <div className="header">
         <nav className="nav container">
