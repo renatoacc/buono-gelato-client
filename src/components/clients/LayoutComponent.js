@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link, Outlet } from "react-router-dom";
 import Logo from "../../assets/img/logo2.png";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { ShoppingCartContext } from "../../context/ShoppingCartProvider";
 
@@ -29,12 +29,12 @@ export default function LayoutComponent() {
     if (!user) {
       getUser();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const logout = async () => {
     try {
-      const response = await axios.post(API_BASE_URL + "/logout");
-      //console.log(response.data);
+      await axios.post(API_BASE_URL + "/logout");
       removeUserFromContext();
       navigate("/login");
     } catch (err) {
@@ -115,8 +115,7 @@ export default function LayoutComponent() {
           <img src={Logo} alt="buono logo" className="nav__img" />
         </nav>
         <div>
-          {" "}
-          <ToastContainer />{" "}
+          <ToastContainer />
         </div>
       </div>
       <Outlet />

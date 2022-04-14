@@ -502,6 +502,14 @@ table {
 
 }
 
+.buttonAdd{
+  width: 10vw;
+  padding: 2vw;
+  height: 5vh;
+  background-color: #fff;
+  border: 1px solid black;
+}
+
 .orderInfo{
   margin-bottom: 2vh;
 }

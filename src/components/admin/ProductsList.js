@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { API_BASE_URL } from "../../consts";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 export default function ShowProducts() {
@@ -10,9 +11,7 @@ export default function ShowProducts() {
   const navigate = useNavigate();
 
   const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
- 
-  
-  
+
   async function checkAdmin() {
     const { data } = await axios.get(API_BASE_URL + "/admin");
     if (data) {
@@ -28,7 +27,6 @@ export default function ShowProducts() {
     }
   }, []);
 
-
   const handleDeleteProduct = (e, elem_id) => {
     e.preventDefault();
     try {
@@ -37,6 +35,7 @@ export default function ShowProducts() {
       }
       deleteProduct();
       const filteredProducts = products.filter((elem) => {
+        // eslint-disable-next-line eqeqeq
         return elem._id != elem_id;
       });
       setProducts(filteredProducts);
@@ -67,8 +66,8 @@ export default function ShowProducts() {
     <div>
       <h1>Products</h1>
       <Link to={"/products"} className="link">
-        <button className="buttonsBuono" type="submit">
-          Create New Product
+        <button className="buttonAdd" type="submit">
+          + Add
         </button>
       </Link>
       {products.length === 0 ? (
