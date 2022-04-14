@@ -19,11 +19,10 @@ import ShowIngredients from "./components/admin/IngredientsList";
 import "boxicons";
 import UpdateIngredient from "./components/admin/IngredientsUpdating";
 import UpdateProduct from "./components/admin/ProductsUpdating";
-
+import { Custom404Page } from "./components/Custom404Page";
 import LayoutComponentAdmin from "./components/admin/LayoutComponentAdmin";
 
 import ShowOrders from "./components/admin/ViewOrders";
-
 
 function App() {
   const { country, toggleCountry } = useContext(CountryContext);
@@ -48,14 +47,14 @@ function App() {
         <Route element={<LayoutComponentAdmin />}>
           <Route path="products" element={<CreateProduct />} />
           <Route path="ingredients" element={<CreateIngredient />} />
-          <Route path="vieworders/:id" element ={<ShowOrders/>} />
-          <Route path="showproducts" element ={<ShowProducts />} />
-          <Route path="showingredients" element ={<ShowIngredients />} />
-          <Route path="products/:id" element ={<UpdateProduct/>} />
-          <Route path="ingredients/:id" element ={<UpdateIngredient/>} />
+          <Route path="vieworders/:id" element={<ShowOrders />} />
+          <Route path="showproducts" element={<ShowProducts />} />
+          <Route path="showingredients" element={<ShowIngredients />} />
+          <Route path="products/:id" element={<UpdateProduct />} />
+          <Route path="ingredients/:id" element={<UpdateIngredient />} />
           <Route path="/vieworders" element={<ShowOrders />} />
-
         </Route>
+        <Route path="*" element={<Custom404Page />} />
       </Routes>
     </div>
   );
