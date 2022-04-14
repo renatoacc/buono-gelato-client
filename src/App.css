@@ -562,10 +562,32 @@ table {
   border-radius: 25px;
 }
 
-.bottonEditDelete{
-
-}
-
 .orderInfo{
   margin-bottom: 2vh;
+}
+
+.layoutErroPage{
+  display: flex;
+  background: url(./assets/img/background.jpeg);
+  margin-top: -17%;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+}
+
+.imageErroPage{
+  width: 80vw;
+}
+
+.errorPage{
+  display:flex;
+  flex-direction: column;
+  width: 90vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoErroPage{
+  margin-top: 5vh;
+  width: 30vw;
 }
