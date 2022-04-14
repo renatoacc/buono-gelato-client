@@ -83,7 +83,7 @@ export default function Cart() {
 
       <table>
         {shoppingCart != 0 ? (
-          <tr className="tableTitles">
+         <tr className="tableTitles">
             <th>Quantity</th>
             <th>Product</th>
             <th colspan="2">Total</th>

@@ -92,8 +92,8 @@ export default function Signup() {
     try {
       await axios.post(API_BASE_URL + "/signup", finalUser);
       navigate("/login");
-    } catch (erro) {
-      setError({ message: erro.response.data.errorMessage });
+    } catch (err) {
+      setError("***Please fill all the fields to proceed");
     }
   };
 
@@ -102,62 +102,117 @@ export default function Signup() {
       <img src={logo} alt="Buono Gelato" />
       <h1>Signup</h1>
       <form onSubmit={handleSignup}>
+      {error ? <input className="error"
+          name="firstName"
+          type="text"
+          value={user.firstName}
+          placeholder="First Name***"
+          onChange={handleUserState}
+        /> :
         <input
           name="firstName"
           type="text"
           value={user.firstName}
           placeholder="First Name"
           onChange={handleUserState}
-        />
-        <input
+        />}
+         {error ? <input className="error"
+          name="lastName"
+          type="text"
+          value={user.lastName}
+          placeholder="Last Name***"
+          onChange={handleUserState}
+        /> : <input
           name="lastName"
           type="text"
           value={user.lastName}
           placeholder="Last Name"
           onChange={handleUserState}
-        />
+        />  }
+        {error ? <input className="error"
+          name="address"
+          type="text"
+          value={user.address}
+          placeholder="Address***"
+          onChange={handleUserState}
+        /> :
         <input
           name="address"
           type="text"
           value={user.address}
           placeholder="Address"
           onChange={handleUserState}
-        />
+        />}
+        {error ? <input className="error"
+          name="city"
+          type="text"
+          value={user.city}
+          placeholder="City***"
+          onChange={handleUserState}
+        /> :
         <input
           name="city"
           type="text"
           value={user.city}
           placeholder="City"
           onChange={handleUserState}
-        />
+        />}
+        {error ? <input className="error"
+          name="postcode"
+          type="number"
+          value={user.postcode}
+          placeholder="ZIP Code***"
+          onChange={handleUserState}
+        /> :
         <input
           name="postcode"
           type="number"
           value={user.postcode}
           placeholder="ZIP Code"
           onChange={handleUserState}
-        />
+        />}
+        {error ? <input className="error"
+          name="vat"
+          type="number"
+          value={user.vat}
+          placeholder="VAT Number***"
+          onChange={handleUserState}
+        /> :
         <input
           name="vat"
           type="number"
           value={user.vat}
           placeholder="VAT Number"
           onChange={handleUserState}
-        />
+        />}
+        {error ? <input className="error"
+          name="phone"
+          type="number"
+          value={user.phone}
+          placeholder="Phone Number***"
+          onChange={handleUserState}
+        /> :
         <input
           name="phone"
-          type="tel"
+          type="number"
           value={user.phone}
           placeholder="Phone Number"
           onChange={handleUserState}
-        />
+        />}
+        {error ? <input className="error"
+          name="email"
+          type="email"
+          value={user.email}
+          placeholder="E-mail***"
+          onChange={handleUserState}
+        /> :
         <input
           name="email"
           type="email"
           value={user.email}
           placeholder="E-mail"
           onChange={handleUserState}
-        />
+        />}
         <input
           name="password"
           type="password"
@@ -174,6 +229,7 @@ export default function Signup() {
           onChange={handlePasswordChange}
           onKeyUp={handleValidation}
         />
+        <p className="text-danger">{error}</p>
         <p className="text-danger">{passwordError}</p>
         <p className="text-danger">{confirmPasswordError}</p>
 
