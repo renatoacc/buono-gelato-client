@@ -1,14 +1,12 @@
-
 import axios from "axios";
 import { API_BASE_URL } from "../../consts";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 
-export default function CreateProduct(){
-
+export default function CreateProduct() {
   const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
- 
+
   async function checkAdmin() {
     const { data } = await axios.get(API_BASE_URL + "/admin");
     if (data) {
@@ -23,17 +21,15 @@ export default function CreateProduct(){
       checkAdmin();
     }
   }, []);
- 
+
   const [product, setProduct] = useState({});
   const handleCreateProduct = (event) => {
-   
     setProduct({ ...product, [event.target.name]: event.target.value });
   };
 
   const navigate = useNavigate();
   const [error, setError] = useState();
-  
-  
+
   const handleSubmitProduct = async (event) => {
     event.preventDefault();
     let image = event.target.productImage.files[0];
@@ -42,8 +38,8 @@ export default function CreateProduct(){
     imageFormData.append("productImage", image);
     imageFormData.append("name", product.name);
     imageFormData.append("typeProduct", product.typeProduct);
-    imageFormData.append("description", product.description,);
-    imageFormData.append("price", product.price,);
+    imageFormData.append("description", product.description);
+    imageFormData.append("price", product.price);
     // console.log("formData",imageFormData)
     // const newProduct =
     // {
@@ -54,7 +50,7 @@ export default function CreateProduct(){
     //   extraIngredients:product.extraIngredients,
     //   productImage:image,
     // }
-   //console.log(" NEWPRODUCT" , imageFormData)
+    //console.log(" NEWPRODUCT" , imageFormData)
     try {
       await axios.post(API_BASE_URL + "/products", imageFormData, {
         withCredentials: true,
@@ -65,43 +61,48 @@ export default function CreateProduct(){
     }
   };
 
-    return(
-      <>
+  return (
+    <div className="formsPage">
       <h1>Create new Product</h1>
-      <form  onSubmit={handleSubmitProduct} method="POST" enctype="multipart/form-data">
-      <input
-        name="name"
-        type="text"
-        value={product.name}
-        placeholder="Name"
-        onChange={handleCreateProduct}
-      />
-     <select name="typeProduct" id="typeProduct">
-        <option value={product.typeProduct = "Crepe"}>Crepe</option>
-        <option value={product.typeProduct = "Waffle"}>Waffle</option>
-        <option value={product.typeProduct = "Bubble Waffle"}>Bubble Waffle</option>
+      <form
+        onSubmit={handleSubmitProduct}
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <input
+          name="name"
+          type="text"
+          value={product.name}
+          placeholder="Name"
+          onChange={handleCreateProduct}
+        />
+        <select name="typeProduct" id="typeProduct">
+          <option value={(product.typeProduct = "Crepe")}>Crepe</option>
+          <option value={(product.typeProduct = "Waffle")}>Waffle</option>
+          <option value={(product.typeProduct = "Bubble Waffle")}>
+            Bubble Waffle
+          </option>
         </select>
-      <input
-        name="description"
-        type="text"
-        value={product.description}
-        placeholder="Description"
-        onChange={handleCreateProduct}
-      />
-      <input
-        name="price"
-        type="number"
-        value={product.price}
-        placeholder="Price"
-        onChange={handleCreateProduct}
-      />
-      <input type="file" name="productImage" />
+        <input
+          name="description"
+          type="text"
+          value={product.description}
+          placeholder="Description"
+          onChange={handleCreateProduct}
+        />
+        <input
+          name="price"
+          type="number"
+          value={product.price}
+          placeholder="Price"
+          onChange={handleCreateProduct}
+        />
+        <input type="file" name="productImage" />
 
-      <button className="buttonsBuono" type="submit">
-        Create
-      </button>
+        <button className="buttonsBuono" type="submit">
+          Create
+        </button>
       </form>
-    
-      </>
-    )
+    </div>
+  );
 }

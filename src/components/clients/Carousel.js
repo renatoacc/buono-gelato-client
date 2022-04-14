@@ -1,12 +1,13 @@
 import axios from "axios";
-import { useContext, useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../consts";
 import { AuthContext } from "../../context/AuthProvider";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
+import { Autoplay, Pagination, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
 export default function Carousel() {
@@ -36,6 +37,7 @@ export default function Carousel() {
       getUser();
     }
     listProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   if (products === null) {
@@ -54,6 +56,10 @@ export default function Carousel() {
       <Swiper
         slidesPerView={1}
         spaceBetween={10}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         pagination={{
           clickable: false,
         }}
@@ -71,16 +77,19 @@ export default function Carousel() {
             spaceBetween: 50,
           },
         }}
-        modules={[Autoplay]}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
         {products.map((elem) => {
           return (
             <SwiperSlide>
-              <div key={elem._id} className="item">
-                <img src={elem.productImage} alt={elem.name} />
-                <h5 className="imageName">{elem.name}</h5>
-              </div>
+              <Link to={"/product/" + elem._id}>
+                <div key={elem._id} className="item">
+                  <img src={elem.productImage} alt={elem.name} />
+                  <h5 className="imageName">{elem.name}</h5>
+                </div>
+              </Link>
             </SwiperSlide>
           );
         })}

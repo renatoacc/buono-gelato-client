@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { API_BASE_URL } from "../../consts";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 export default function ShowProducts() {
@@ -10,9 +11,7 @@ export default function ShowProducts() {
   const navigate = useNavigate();
 
   const { admin, addAdminToContext } = useContext(AuthContext); // logout , removeUserFromContext
- 
-  
-  
+
   async function checkAdmin() {
     const { data } = await axios.get(API_BASE_URL + "/admin");
     if (data) {
@@ -28,7 +27,6 @@ export default function ShowProducts() {
     }
   }, []);
 
-
   const handleDeleteProduct = (e, elem_id) => {
     e.preventDefault();
     try {
@@ -37,6 +35,7 @@ export default function ShowProducts() {
       }
       deleteProduct();
       const filteredProducts = products.filter((elem) => {
+        // eslint-disable-next-line eqeqeq
         return elem._id != elem_id;
       });
       setProducts(filteredProducts);
@@ -64,54 +63,63 @@ export default function ShowProducts() {
   }, [filter]);
 
   return (
-    <div>
+    <div className="productsList">
       <h1>Products</h1>
       <Link to={"/products"} className="link">
-        <button className="buttonsBuono" type="submit">
-          Create New Product
+        <button className="buttonAdd" type="submit">
+          +
         </button>
       </Link>
-      {products.length === 0 ? (
-        <h1> Sorry, we don't have this product </h1>
-      ) : (
-        products
-          .filter((elem) => {
-            const search = filter.toLocaleLowerCase();
-            return elem.name.toLocaleLowerCase().trim().includes(search.trim());
-          })
-          .map((elem) => {
-            return (
-              <div key={elem._id}>
-                <h1>{elem.name}</h1>
-                <img src={elem.productImage} alt={elem.name}></img>
-                <p>{elem.description}</p>
-                <p>{elem.price}€</p>
-
-                <Link to={"/products/" + elem._id} className="link">
-                  <button className="buttonsBuono" type="submit">
-                    Edit
-                  </button>
-                </Link>
-                <button
-                  className="buttonsBuono"
-                  onClick={(e) => {
-                    handleDeleteProduct(e, elem._id);
-                  }}
-                >
-                  Delete
-                </button>
-                {/* </Link> */}
-              </div>
-            );
-          })
-      )}
-      <input
-        className="quantity"
-        value={filter}
-        type="text"
-        placeholder="Search"
-        onChange={handleSearch}
-      />
+      <div className="productItems">
+        {products.length === 0 ? (
+          <h1> Sorry, we don't have this product </h1>
+        ) : (
+          products
+            .filter((elem) => {
+              const search = filter.toLocaleLowerCase();
+              return elem.name
+                .toLocaleLowerCase()
+                .trim()
+                .includes(search.trim());
+            })
+            .map((elem) => {
+              return (
+                <div className="foodCard" key={elem._id}>
+                  <h1 className="titleMenu">{elem.name}</h1>
+                  <img
+                    className="imageProducts"
+                    src={elem.productImage}
+                    alt={elem.name}
+                  ></img>
+                  <p className="description">{elem.description}</p>
+                  <p className="priceCard">{elem.price}€</p>
+                  <div className="bottonEditDelete">
+                    <Link to={"/products/" + elem._id} className="link">
+                      <button className="buttonsBuono" type="submit">
+                        Edit
+                      </button>
+                    </Link>
+                    <button
+                      className="buttonsBuono"
+                      onClick={(e) => {
+                        handleDeleteProduct(e, elem._id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+        )}
+        <input
+          className="quantity"
+          value={filter}
+          type="text"
+          placeholder="Search"
+          onChange={handleSearch}
+        />
+      </div>
       <div className="endPage" />
     </div>
   );

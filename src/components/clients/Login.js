@@ -26,20 +26,19 @@ export default function Login() {
       let userInfo = response.data.user;
       addUserToContext(response.data.user);
       getCsrfToken();
-      if(userInfo.userType === "admin"){
-      navigate("/vieworders")
-      }else{
-      navigate("/profile");
+      if (userInfo.userType === "admin") {
+        navigate("/vieworders");
+      } else {
+        navigate("/profile");
       }
     } catch (err) {
-     setErrorState("Email or password don't match...");
-    
+      setErrorState("Email or password don't match...");
     }
   };
-  
+
   return (
     <div className="formsPage">
-      <img src={logo} alt="Buono Gelato" />
+      <img src={logo} alt="Buono Gelato" className="logoCompany" />
       <h1>Login</h1>
       <form onSubmit={login}>
         <input
@@ -56,7 +55,7 @@ export default function Login() {
           value={user.password}
           onChange={handleUserState}
         />
-         {errorState && <p className="text-danger" >{errorState}</p>}
+        {errorState && <p className="text-danger">{errorState}</p>}
 
         <button className="buttonsBuono">Login</button>
         <Link className="link" to={"/signup"}>
