@@ -8,11 +8,6 @@ export default function Signup() {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
-    address: "",
-    city: "",
-    postcode: "",
-    vat: "",
-    phone: "",
     email: "",
     password: "",
   });
@@ -135,96 +130,6 @@ export default function Signup() {
             type="text"
             value={user.lastName}
             placeholder="Last Name"
-            onChange={handleUserState}
-          />
-        )}
-        {error ? (
-          <input
-            className="error"
-            name="address"
-            type="text"
-            value={user.address}
-            placeholder="Address***"
-            onChange={handleUserState}
-          />
-        ) : (
-          <input
-            name="address"
-            type="text"
-            value={user.address}
-            placeholder="Address"
-            onChange={handleUserState}
-          />
-        )}
-        {error ? (
-          <input
-            className="error"
-            name="city"
-            type="text"
-            value={user.city}
-            placeholder="City***"
-            onChange={handleUserState}
-          />
-        ) : (
-          <input
-            name="city"
-            type="text"
-            value={user.city}
-            placeholder="City"
-            onChange={handleUserState}
-          />
-        )}
-        {error ? (
-          <input
-            className="error"
-            name="postcode"
-            type="number"
-            value={user.postcode}
-            placeholder="ZIP Code***"
-            onChange={handleUserState}
-          />
-        ) : (
-          <input
-            name="postcode"
-            type="number"
-            value={user.postcode}
-            placeholder="ZIP Code"
-            onChange={handleUserState}
-          />
-        )}
-        {error ? (
-          <input
-            className="error"
-            name="vat"
-            type="number"
-            value={user.vat}
-            placeholder="VAT Number***"
-            onChange={handleUserState}
-          />
-        ) : (
-          <input
-            name="vat"
-            type="number"
-            value={user.vat}
-            placeholder="VAT Number"
-            onChange={handleUserState}
-          />
-        )}
-        {error ? (
-          <input
-            className="error"
-            name="phone"
-            type="number"
-            value={user.phone}
-            placeholder="Phone Number***"
-            onChange={handleUserState}
-          />
-        ) : (
-          <input
-            name="phone"
-            type="number"
-            value={user.phone}
-            placeholder="Phone Number"
             onChange={handleUserState}
           />
         )}

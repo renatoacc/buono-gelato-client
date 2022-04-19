@@ -52,7 +52,7 @@ export default function Profile() {
     }
   }, []);
 
-  if (userInfo === null || products === null) {
+  if (products === null) {
     return (
       <box-icon
         name="loader-alt"
@@ -70,19 +70,19 @@ export default function Profile() {
           <h3 className="p__FromProfile">
             Welcome,
             <br />
-            {userInfo.firstName + " " + userInfo.lastName}!
+            {userInfo ? userInfo.firstName + " " + userInfo.lastName : "Guest"}!
           </h3>
           <img src={avatar} alt="avatar" className="avatar" />
         </div>
         <div>
           <p className="p__FromProfile">
             <b>City: </b>
-            {userInfo.city}
+            {userInfo ? userInfo.city : " "}
           </p>
 
           <p className="p__FromProfile">
             <b>Email: </b>
-            {userInfo.email}
+            {userInfo ? userInfo.email : " "}
           </p>
         </div>
       </div>
