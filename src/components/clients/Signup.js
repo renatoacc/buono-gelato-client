@@ -79,6 +79,7 @@ export default function Signup() {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
   const navigate = useNavigate();
+  const [error, setError] = useState();
 
   const handleSignup = async (event) => {
     event.preventDefault();
@@ -87,7 +88,7 @@ export default function Signup() {
       await axios.post(API_BASE_URL + "/signup", finalUser);
       navigate("/login");
     } catch (err) {
-      console.log("***Please fill all the fields to proceed");
+      setError("***Please fill all the fields to proceed");
     }
   };
 
@@ -96,27 +97,60 @@ export default function Signup() {
       <img src={logo} alt="Buono Gelato" className="logoCompany" />
       <h1>Signup</h1>
       <form onSubmit={handleSignup}>
-        <input
-          name="firstName"
-          type="text"
-          value={user.firstName}
-          placeholder="First Name"
-          onChange={handleUserState}
-        />
-        <input
-          name="lastName"
-          type="text"
-          value={user.lastName}
-          placeholder="Last Name"
-          onChange={handleUserState}
-        />
-        <input
-          name="email"
-          type="email"
-          value={user.email}
-          placeholder="E-mail"
-          onChange={handleUserState}
-        />
+        {error ? (
+          <input
+            className="error"
+            name="firstName"
+            type="text"
+            value={user.firstName}
+            placeholder="First Name***"
+            onChange={handleUserState}
+          />
+        ) : (
+          <input
+            name="firstName"
+            type="text"
+            value={user.firstName}
+            placeholder="First Name"
+            onChange={handleUserState}
+          />
+        )}
+        {error ? (
+          <input
+            className="error"
+            name="lastName"
+            type="text"
+            value={user.lastName}
+            placeholder="Last Name***"
+            onChange={handleUserState}
+          />
+        ) : (
+          <input
+            name="lastName"
+            type="text"
+            value={user.lastName}
+            placeholder="Last Name"
+            onChange={handleUserState}
+          />
+        )}
+        {error ? (
+          <input
+            className="error"
+            name="email"
+            type="email"
+            value={user.email}
+            placeholder="E-mail***"
+            onChange={handleUserState}
+          />
+        ) : (
+          <input
+            name="email"
+            type="email"
+            value={user.email}
+            placeholder="E-mail"
+            onChange={handleUserState}
+          />
+        )}
         <input
           name="password"
           type="password"
@@ -133,6 +167,7 @@ export default function Signup() {
           onChange={handlePasswordChange}
           onKeyUp={handleValidation}
         />
+        <p className="text-danger">{error}</p>
         <p className="text-danger">{passwordError}</p>
         <p className="text-danger">{confirmPasswordError}</p>
 
