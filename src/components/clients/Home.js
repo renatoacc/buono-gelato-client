@@ -12,6 +12,9 @@ export default function Home() {
         <Link className="link" to={"/signup"}>
           Signup
         </Link>
+        <Link className="link" to={"/instructions"}>
+          Instructions
+        </Link>
       </div>
     </div>
   );
