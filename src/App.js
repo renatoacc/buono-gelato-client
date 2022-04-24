@@ -17,6 +17,7 @@ import CreateIngredient from "./components/admin/IngredientsManage";
 import ShowProducts from "./components/admin/ProductsList";
 import ShowIngredients from "./components/admin/IngredientsList";
 import "boxicons";
+import Instructions from "./components/clients/Instructions";
 import UpdateIngredient from "./components/admin/IngredientsUpdating";
 import UpdateProduct from "./components/admin/ProductsUpdating";
 import { Custom404Page } from "./components/Custom404Page";
@@ -37,7 +38,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
-        <Route path="instructions" element={<Instructions/>}
+        <Route path="instructions" element={<Instructions />} />
         <Route element={<LayoutComponent />}>
           <Route path="profile" element={<Profile />} />
           <Route path="shop" element={<Shop />} />
